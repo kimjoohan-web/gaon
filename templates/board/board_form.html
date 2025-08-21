@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">{{category_name}}</h5>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <!-- 오류표시 Start -->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- 오류표시 End -->
+        <div class="mb-3">
+            <label for="b_subject" class="form-label">제목</label>
+            <input type="text" class="form-control" name="b_subject" id="b_subject"
+                   value="{{ form.b_subject.value|default_if_none:'' }}">
+        </div>
+        <div class="mb-3">
+            <label for="b_content" class="form-label">내용</label>
+            <textarea class="form-control" name="b_content"
+                      id="b_content" rows="10">{{ form.b_content.value|default_if_none:'' }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="b_err_gubun" class="form-label">장애구분</label>
+            <select  class="form-control" name="b_err_gubun" id="b_err_gubun">
+                <option value="">선택해 주세요</option>
+                <option value=1 {% if 1 == qboard.b_err_gubun %}selected{% endif %}>LMS 장애</option>
+                <option value=2 {% if 2 == qboard.b_err_gubun %}selected{% endif %}>서버 장애</option>
+                <option value=3 {% if 3 == qboard.b_err_gubun %}selected{% endif %}>개발 장애</option>
+                <option value=4 {% if 4 == qboard.b_err_gubun %}selected{% endif %}>기타 장애</option> 
+
+            </select>
+            
+        </div>
+        <div class="mb-3">
+            <label for="b_link_one" class="form-label">링크1</label>
+             <input type="text" class="form-control" name="b_link_one" id="b_link_one"  value="{{ qboard.b_link_one|default_if_none:'' }}">
+        </div>   
+        <div class="mb-3">
+            <label for="b_link_two" class="form-label">링크2</label>
+             <input type="text" class="form-control" name="b_link_two" id="b_link_two"  value="{{ qboard.b_link_two|default_if_none:'' }}">
+        </div>
+        <div class="mb-3">
+            <label for="b_file_one" class="form-label">첨부파일</label>
+           {%if qboard.b_file_one %}
+            기존 파일 <a href="/board/download?path={{ qboard.b_file_one}}">{{qboard.b_file_one}}</a> 
+           {%endif%}
+            <input type="file" class="form-control" name="b_file_one" id="b_file_one">
+        </div>
+        <div class="mb-3">
+            <label for="b_file_two" class="form-label">첨부파일</label>
+            {%if qboard.b_file_two %}
+            기존 파일 <a href="/board/download?path={{ qboard.b_file_two}}">{{qboard.b_file_two}}</a> 
+            {%endif%}
+            <input type="file" class="form-control" name="b_file_two" id="b_file_two">
+        </div>
+        <div class="mb-3">
+            <label for="b_file_three" class="form-label">첨부파일</label>
+            {%if qboard.b_file_three %}
+            기존 파일 <a href="/board/download?path={{ qboard.b_file_three}}">{{qboard.b_file_three}}</a> 
+            {%endif%}
+            <input type="file" class="form-control" name="b_file_three" id="b_file_three">
+        </div>
+        <button type="submit" class="btn btn-primary">저장하기</button>
+    </form>
+</div>
+{% endblock %}

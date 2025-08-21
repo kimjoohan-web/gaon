@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load pybo_filter %}
+{% block content %}
+
+<div class="container my-3">
+    <!-- message 표시 -->
+    {% if messages %}
+    <div class="alert alert-danger my-3" role="alert">
+    {% for message in messages %}
+        <strong>{{ message.tags }}</strong>
+        <ul><li>{{ message.message }}</li></ul>
+    {% endfor %}
+    </div>
+    {% endif %}
+    <!-- 질문 -->
+    <h2 class="border-bottom py-2">{{ qboard.b_subject }}</h2>    
+    <div class="mb-3">작성자 : {{ qboard.b_name.username}}    </div>
+    <div class="mb-3">게시일 : {{ qboard.b_create_date}}</div>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" >{{ qboard.b_content|mark }}</div>
+            <!-- <div class="my-3">
+                <ul>
+             {% for qcomment in qcomment_list %}                
+                       <li>{{qcomment.content}} ({{qcomment.create_date}})</li>
+             {%endfor%}
+             </ul> 
+             </div>-->
+           
+        </div>
+    </div>
+    <div class="mb-3">
+            <label for="subject" class="form-label">장애구분</label>
+            {{ qboard.b_err_gubun}}
+    </div>
+    <div class="mb-3">관련 링크 : {{ qboard.b_link_one}}</div>
+    <div class="mb-3">관련 링크 : {{ qboard.b_link_two}}</div>
+    <div class="mb-3">관련 파일 : <a href="/board/download?path={{ qboard.b_file_one}}">{{qboard.b_file_one}}</a> </div>
+    <div class="mb-3">관련 파일 : <a href="/board/download?path={{ qboard.b_file_two}}">{{qboard.b_file_two}}</a> </div>
+    <div class="mb-3">관련 파일 : <a href="/board/download?path={{ qboard.b_file_three}}">{{qboard.b_file_three}}</a> </div>
+    
+    
+    <div class="my-3">
+                
+        {% if request.user  == qboard.b_name %} 
+        <a href="{% url 'board:b_modify' category_id qboard.id %}" class="btn btn-sm btn-outline-secondary">수정</a>
+        <a href="javascript:void(0)"  class="delete btn btn-sm btn-outline-secondary" data-uri="{% url 'board:b_delete' category_id qboard.id %}">삭제</a>
+        {%endif%} 
+    </div>
+</div>
+
+
+    
+
+{% endblock %}
+{% block script %}
+
+<script type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+/*
+const recommend_elements = document.getElementsByClassName("recommend");
+Array.from(recommend_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 추천하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+*/
+
+/*
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('dpage').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+    });
+});
+*/
+
+
+
+//댓글
+/* 
+const comment_elements = document.getElementById("btn_qcomment");
+
+    comment_elements.addEventListener('click', function() {
+         $("#qcomment_form").show()        
+    });
+
+//댓글
+
+        
+        
+*/
+/* 
+
+function acomment(answerid) {    
+    $(".acomment_form").hide();    
+    $("#acomment_form_"+answerid).show()
+    
+}
+*/
+</script>
+{% endblock %}
