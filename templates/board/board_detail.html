@@ -45,7 +45,8 @@
         {% if request.user  == qboard.b_name %} 
         <a href="{% url 'board:b_modify' category_id qboard.id %}" class="btn btn-sm btn-outline-secondary">수정</a>
         <a href="javascript:void(0)"  class="delete btn btn-sm btn-outline-secondary" data-uri="{% url 'board:b_delete' category_id qboard.id %}">삭제</a>
-        {%endif%} 
+        {%endif%}
+        <a href="{% url 'board:b_list' category_id %}" class="btn btn-sm btn-outline-secondary">목록</a>
     </div>
 </div>
 
