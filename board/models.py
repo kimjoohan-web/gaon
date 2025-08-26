@@ -1,6 +1,7 @@
 from django.db import models
 # from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import User
+
 # Create your models here.
 
 class Category(models.Model):
@@ -17,6 +18,7 @@ class Q_board(models.Model):
     b_err_gubun=models.IntegerField()
     b_subject= models.TextField()
     b_content = models.TextField()
+        
     b_link_one = models.TextField(null=True, blank=True)
     b_link_two = models.TextField(null=True, blank=True)
     b_file_one = models.FileField(upload_to="files/", null=True, blank=True)
