@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 # from pybo import views
 urlpatterns = [
+    path('summernote/', include('django_summernote.urls')),
     path('admin/', admin.site.urls),
     path('pybo/', include('pybo.urls')),
     path('common/', include('common.urls')),
@@ -31,4 +32,9 @@ urlpatterns = [
     path ('', views.index, name='index'),
     path('board/', include('board.urls')),
     # path('pybo/', include('pybo.urls')),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+def get_filename(filename):
+    return filename.upper()

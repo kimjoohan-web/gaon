@@ -5,3 +5,12 @@
 input[type=submit] {
     margin-top:10px;
 } */
+
+.note-editor { /* summernote editor용 css */
+    position: relative !important;
+    font-size: 17px;
+}
+
+main, note-editor { /* summernote editor용 css */
+    min-height: 60vh;
+}

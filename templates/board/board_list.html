@@ -30,7 +30,7 @@
         <tr>
             <td class="text-center">
                 <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
-                {{ q_list.paginator.count|sub:q_list.start_index|sub:forloop.counter0|add:1 }}
+                {{ q_list.paginator.count|sub:q_list.start_index|sub:forloop.counter0|add:1 }}                
             </td>
             <!-- <td>{{ forloop.counter }}</td> -->
             <td class="text-start">
@@ -55,10 +55,13 @@
     <!-- 페이징처리 시작 -->
     <ul class="pagination justify-content-center">
         <!-- 이전페이지 -->
-        {% if qboard.has_previous %}
+
+         
+          
+        {% if q_list.has_previous %}
         <li class="page-item">
             <!-- <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a> -->
-            <a class="page-link" data-page="{{ qboard.previous_page_number }}" href="javascript:void(0)">이전</a>
+            <a class="page-link" data-page="{{ q_list.previous_page_number }}" href="javascript:void(0)">이전</a>
         </li>
         {% else %}
         <li class="page-item disabled">
@@ -67,12 +70,14 @@
         </li>
         {% endif %}
         <!-- 페이지리스트 -->
-        {% for page_number in qboard.paginator.page_range %}
-        {% if page_number >= qboard.number|add:-5 and page_number <= qboard.number|add:5 %}
-        {% if page_number == qboard.number %}
+
+       
+        {% for page_number in q_list.paginator.page_range %}
+        {% if page_number >= q_list.number|add:-5 and page_number <= q_list.number|add:5 %}
+        {% if page_number == q_list.number %}
         <li class="page-item active" aria-current="page">
-            <!-- <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a> -->
-             <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">{{ page_number }}</a>
+            <a class="page-link" data-page="{{ page_number }}"   href="javascript:void(0)">{{ page_number }}</a>
+           
         </li>
         {% else %}
         <li class="page-item">
@@ -83,10 +88,10 @@
         {% endif %}
         {% endfor %}
         <!-- 다음페이지 -->
-        {% if qboard.has_next %}
+        {% if q_list.has_next %}
         <li class="page-item">
             <!-- <a class="page-link" href="?page={{ question_list.next_page_number }}">다음</a> -->
-             <a class="page-link" data-page="{{ qboard.next_page_number }}"           href="javascript:void(0)">다음</a>
+             <a class="page-link" data-page="{{ q_list.next_page_number }}"           href="javascript:void(0)">다음</a>
         </li>
         {% else %}
         <li class="page-item disabled">

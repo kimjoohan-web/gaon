@@ -11,6 +11,16 @@ from django.http import HttpResponse
 from django.http import FileResponse
 from django.core.files.storage import FileSystemStorage
 from urllib.parse import quote
+from django import forms # 추가
+from django_summernote.widgets import SummernoteWidget # 추가
+
+form_article = forms.modelform_factory( # 글 작성과 편집에 사용하는 form
+    Q_board, # form에 사용되는 model
+    forms.ModelForm, # 기본 form
+    fields='__all__', # form에서 편집 가능한 필드 목록
+    widgets={'b_content': SummernoteWidget()} # content field에 summernote editor 적용
+)
+
 # Create your views here.
 
 @login_required(login_url='common:login')
@@ -46,17 +56,14 @@ def b_list(request,category_id):
     # category_list = Catogory.objects.all()
     q_list = Q_board.objects.filter(b_gubun=category.id).order_by('-b_create_date')    
 
-    # if kw:
-    #     question_list = question_list.filter(
-    #         Q(subject__icontains=kw) | 
-    #         Q(content__icontains=kw) |
-    #         Q(answer__content__icontains=kw) |
-    #         Q(author__username__icontains=kw) |
-    #         Q(answer__author__username__icontains=kw) 
-    #     ).distinct()
+    if kw:
+        q_list = q_list.filter(
+            Q(b_subject__icontains=kw) | 
+            Q(b_content__icontains=kw) 
+           
+        ).distinct()
     paginator = Paginator(q_list, 10)  # 페이지당 10개씩 보여주기
     page_obj = paginator.get_page(page)
-
     context ={'q_list':page_obj,'page':page,'category_id':category.id }
 
     return render(request,'board/board_list.html',context)
