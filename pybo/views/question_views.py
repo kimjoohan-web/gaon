@@ -23,7 +23,7 @@ def question_create(request,category_id):
             question.create_date = timezone.now()
             question.category = category
             question.save()
-            return redirect('pybo:index',category_id=category.id)
+            return redirect('pybo:list',category_id=category.id)
     else:
         form = QuestionForm()
     context = {'form': form}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load pybo_filter %}
+{% block content %}
+<style>
+    /* 포스팅 활동량 시작 */
+.calendar_title {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.calendar {
+    width: 70%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 1rem auto;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.calendar_header th {
+    text-align: center;
+    border: 1px solid #c9c9c9;
+    padding: 8px;
+}
+
+.calendar_day {
+    text-align: center;
+    height: 5rem;
+    border: 1px solid #c9c9c9;
+    position: relative;
+}
+
+.calendar_day .date {
+    font-size: 1rem;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+.calendar_day .count {
+    color: #d82e2e;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: inline-block;
+}
+/* 포스팅 활동량 끝 */
+</style>
+<h2 class="calendar_title">포스팅 활동량 [{{ year }}년 {{ month }}월 기준]</h2>
+<table class="calendar">
+  <thead>
+    <tr class="calendar_header">
+      <th>월</th>
+      <th>화</th>
+      <th>수</th>
+      <th>목</th>
+      <th>금</th>
+      <th>토</th>
+      <th>일</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for week in cal_data %}
+    <tr>
+      {% for day, count in week %}
+      <td class="calendar_day" {% if day == today.day %} style="background-color: rgb(252 241 202);" {% endif %}>
+        {% if day %}
+        <div class="date">{{ day }}</div>
+        {% if day <= today.day %}
+        <div class="count">{{ count }}개</div>
+        {% endif %}
+        {% endif %}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>    
+</table>
+{% endblock %}

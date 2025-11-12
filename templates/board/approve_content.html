@@ -1,0 +1,20 @@
+{% extends 'base_popup.html' %}
+
+{% block content %}
+<a href="javascript:approve_print({{qboard.id}})">파일다운로드</a>
+<div id="inner_content">
+{% autoescape off  %}{{qboard.b_content}}{% endautoescape %}             
+</div>
+{% endblock %}
+{% block script %}
+
+<script type='text/javascript'>
+function approve_print(qboard_id) {
+    var url = "/board/approve_list/approve_print/" + qboard_id + "/";
+    var name = "approve_print";
+    var option = "width = 800, height = 600, top = 100, left = 100, location = no";
+    window.open(url, name, option);
+}
+
+</script>
+{% endblock %}

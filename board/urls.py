@@ -14,6 +14,11 @@ urlpatterns =[
     path('<int:category_id>/b_modify/<int:qboard_id>/', views.b_modify,name='b_modify'),    
     path('<int:category_id>/b_delete/<int:qboard_id>/', views.b_delete,name='b_delete'),
     path('download/', views.file_download, name='file_download'),
+    path('approve_list/', views.approve_list,name='approve_list'),
+    path('approve_list/<int:aboard_id>/', views.a_detail,name='a_detail'),
+    path('approve_list/ajax_sungin/', views.ajax_sungin,name='ajax_sungin'),    
+    path('approve_list/approve_print/<int:qboard_id>/', views.approve_print,name='approve_print'),
+    path('approve_list/approve_content/<int:qboard_id>/', views.approve_content,name='approve_content'),
     
     # path('question/<int:category_id>/create/',question_views.question_create, name='question_create'),
     # path('question/<int:category_id>/modify/<int:question_id>/',question_views.question_modify, name='question_modify'),

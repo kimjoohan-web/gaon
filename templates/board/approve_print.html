@@ -1,0 +1,372 @@
+﻿{% extends 'base_popup.html' %}
+{% load pybo_filter %}
+{% block content %}
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><head>
+    <title>만족도 분석 및 개선 보고</title>
+    <meta http_quiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="/media/hwpex/LMS 개발 제안보고서_style.css"></head>
+    <body>
+        <center>
+            <table >
+                <tr>
+                    <td style="text-align:left; width:50%;">
+                        <button type="button" onclick="window.print();">인쇄</button>
+                        <button type="button" onclick="window.close();">닫기</button>
+                    </td>
+                    <td style="text-align:right; width:50%;">                    
+                        {% if user.is_superuser or user == qboard.b_user or user == qboard.examine_user or user == qboard.che_user %}
+                            <a href="{% url 'board:approve_modify' qboard.id %}">수정</a>                        
+                            <a href="javascript:void(0);" class="delete" data-uri="{% url 'board:approve_delete' qboard.id %}">삭제</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <table style="width:210mm; margin-top:20px; border:2px solid #000;">
+                <tr>
+                    <td  colspan="5" style="border:1px solid #000;text-align:center; font-size:25px; font-weight:bold; padding:10px 0 10px 0;">LMS 개발 제안보고서</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">작성일 </td>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">{{ qboard.b_create_date }}</td>
+                    <td  rowspan=2 style="text-align:center; font-size:14px; padding-bottom:10px;">결재</td>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">검토</td>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">확인</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">제안자</td>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">김주한</td>                
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">{{ qboard.examine }}</td>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">{{ qboard.che }}</td>
+                </tr>
+                
+            </table>
+            <table style="table-layout: fixed;width:210mm; margin-top:20px; border:2px solid #000;">
+                <tr>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;width: 10%;">개선안건</td>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">{{qboard.b_subject}} </td>                
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">업무팀명</td>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">훈련지원</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;">제안목적</td>
+                    <td colspan="3" style="word-wrap: break-word;word-break: break-all;   border:1px solid ;text-align:center; font-size:14px; padding-bottom:10px;overflow: hidden;height: auto;">{% autoescape off  %}{{qboard.b_content}}{% endautoescape %} </td>                
+                    
+                </tr>
+            </table>
+        </center>
+        <div class="hpa" style="width:210mm;height:297mm;">
+            <svg class="hs" viewBox="-0.15 -0.15 210.30 297.29" style="left:-0.15mm;top:-0.15mm;width:210.30mm;height:297.29mm;">
+                <path d="M15,24.85 L15,277.15" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.30;"></path>
+                <path d="M195,24.85 L195,277.15" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.30;"></path>
+                <path d="M14.85,24.99 L195.15,24.99" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.30;"></path>
+                <path d="M14.85,277 L195.15,277" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.30;"></path>
+            </svg>
+            <div class="hcD" style="left:20mm;top:29.99mm;">
+                <div class="hcI">
+                    <div class="hls ps20" style="line-height:6.28mm;white-space:nowrap;left:0mm;top:-0.35mm;height:7.06mm;width:170mm;">
+                        <span class="hrt cs12">LMS 개발 제안보고서</span>
+                    </div>
+                    <div class="hls ps20" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:11.08mm;height:4.23mm;width:0mm;"></div>
+                    <div class="hls ps17" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:38.82mm;height:4.23mm;width:0mm;"></div>
+                </div>
+            </div>
+            <div class="htb" style="left:20.50mm;top:41.78mm;width:170.32mm;height:27.74mm;">
+                <svg class="hs" viewBox="-2.50 -2.50 175.32 32.74" style="left:-2.50mm;top:-2.50mm;width:175.32mm;height:32.74mm;">
+                    <path d="M21.02,0 L21.02,26.75" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.22,0.33;stroke-width:0.15;"></path>
+                    <path d="M85.62,0 L85.62,26.75" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.22,0.33;stroke-width:0.15;"></path>
+                    <path d="M99.30,0 L99.30,26.75" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.22,0.33;stroke-width:0.15;"></path>
+                    <path d="M134.31,0 L134.31,26.75" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.22,0.33;stroke-width:0.15;"></path>
+                    <path d="M-0.05,0 L169.38,0" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.50;"></path>
+                    <path d="M-0.05,11.38 L85.70,11.38" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.22,0.33;stroke-width:0.15;"></path>
+                    <path d="M99.23,11.38 L169.38,11.38" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.22,0.33;stroke-width:0.15;"></path>
+                    <path d="M-0.05,26.75 L169.38,26.75" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.22,0.33;stroke-width:0.15;"></path>
+                    <path d="M134.31,0 L134.31,26.75" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.22,0.33;stroke-width:0.15;"></path>
+                    <path d="M21.02,0 L21.02,26.75" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.22,0.33;stroke-width:0.15;"></path>
+                    <path d="M-0.05,26.75 L169.38,26.75" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.22,0.33;stroke-width:0.15;"></path>
+                    <path d="M-0.05,0 L169.38,0" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.50;"></path>
+                </svg>
+                <div class="hce" style="left:0mm;top:0mm;width:21.02mm;height:11.38mm;">
+                    <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                        <div class="hcI" style="top:3.07mm;">
+                            <div class="hls ps21" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:17.41mm;">
+                                <span class="hrt cs10">일자</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hce" style="left:21.02mm;top:0mm;width:64.60mm;height:11.38mm;">
+                    <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                        <div class="hcI" style="top:3.07mm;">
+                            <div class="hls ps19" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:61mm;">
+                                <span class="hrt cs10">{{qboard.b_create_date}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hce" style="left:85.62mm;top:0mm;width:13.68mm;height:26.75mm;">
+                    <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                        <div class="hcI" style="top:7.37mm;">
+                            <div class="hls ps19" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:10.08mm;">
+                                <span class="hrt cs10">결</span>
+                            </div>
+                            <div class="hls ps19" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:6.56mm;height:4.23mm;width:10.08mm;">
+                                <span class="hrt cs10">재</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hce" style="left:99.30mm;top:0mm;width:35.01mm;height:11.38mm;">
+                    <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                        <div class="hcI" style="top:3.07mm;">
+                            <div class="hls ps19" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:31.41mm;">
+                                <span class="hrt cs10">검토</span></div></div></div></div><div class="hce" style="left:134.31mm;top:0mm;width:35.01mm;height:11.38mm;">
+                                    <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                                        <div class="hcI" style="top:3.07mm;">
+                                            <div class="hls ps19" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:31.41mm;">
+                                                <span class="hrt cs10">확인</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="hce" style="left:0mm;top:11.38mm;width:21.02mm;height:15.37mm;">
+                                <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                                    <div class="hcI" style="top:5.07mm;">
+                                        <div class="hls ps21" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:17.41mm;">
+                                            <span class="hrt cs10">제안자</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="hce" style="left:21.02mm;top:11.38mm;width:64.60mm;height:15.37mm;">
+                            <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                                <div class="hcI" style="top:5.07mm;">
+                                    <div class="hls ps19" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:61mm;">
+                                        <span class="hrt cs10">김주한</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hce" style="left:99.30mm;top:11.38mm;width:35.01mm;height:15.37mm;">
+                            <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                                <div class="hcI" style="top:5.07mm;">
+                                    <div class="hls ps19" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:31.41mm;">
+                                        <span class="hrt cs10">{{qboard.examine}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hce" style="left:134.31mm;top:11.38mm;width:35.01mm;height:15.37mm;">
+                            <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                                <div class="hcI" style="top:5.07mm;">
+                                    <div class="hls ps19" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:31.41mm;">
+                                        <span class="hrt cs10">{{qboard.che}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="htb" style="left:21mm;top:73.34mm;width:171.08mm;height:191.86mm;">
+                    <svg class="hs" viewBox="-2.50 -2.50 176.08 196.86" style="left:-2.50mm;top:-2.50mm;width:176.08mm;height:196.86mm;">
+                        <defs><pattern id="w_00" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="rgb(242,242,242)"/></pattern></defs>
+                        <path fill="url(#w_00)" d="M0,0L29.56,0L29.56,12.42L0,12.42L0,0Z "></path>
+                        <path fill="url(#w_00)" d="M110.80,0L132.45,0L132.45,12.42L110.80,12.42L110.80,0Z "></path>
+                        <path fill="url(#w_00)" d="M0,12.42L29.56,12.42L29.56,35.57L0,35.57L0,12.42Z "></path>
+                        <path fill="url(#w_00)" d="M0,35.57L29.56,35.57L29.56,44.35L0,44.35L0,35.57Z "></path>
+                        <path d="M0.06,44.16 L29.56,44.16" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M0.06,44.53 L29.56,44.53" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path fill="url(#w_00)" d="M29.56,35.57L169.09,35.57L169.09,44.35L29.56,44.35L29.56,35.57Z "></path>
+                        <path d="M29.56,44.16 L169.03,44.16" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M29.56,44.53 L169.03,44.53" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M0.06,44.16 L29.56,44.16" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M0.06,44.53 L29.56,44.53" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M0.06,144.96 L29.56,144.96" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M0.06,145.33 L29.56,145.33" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M29.56,44.16 L169.03,44.16" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M29.56,44.53 L169.03,44.53" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M29.56,144.96 L169.03,144.96" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M29.56,145.33 L169.03,145.33" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M0.06,144.96 L29.56,144.96" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M0.06,145.33 L29.56,145.33" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M0.06,173.45 L29.56,173.45" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M0.06,173.82 L29.56,173.82" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M29.56,144.96 L169.03,144.96" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M29.56,145.33 L169.03,145.33" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M29.56,173.45 L169.03,173.45" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M29.56,173.82 L169.03,173.82" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.12;"></path>
+                        <path d="M0,0 L0,189.87" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M29.56,0 L29.56,173.40" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M110.80,0 L110.80,12.43" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M132.45,0 L132.45,12.43" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M169.09,0 L169.09,189.87" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M-0.06,0 L169.15,0" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.40;"></path>
+                        <path d="M-0.06,12.42 L169.15,12.42" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M-0.06,35.57 L169.15,35.57" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M-0.06,173.64 L169.15,173.64" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M-0.06,189.87 L169.15,189.87" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M169.09,0 L169.09,189.87" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M0,0 L0,189.87" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M-0.06,189.87 L169.15,189.87" style="stroke:#000000;stroke-linecap:butt;stroke-dasharray:0.17,0.26;stroke-width:0.12;"></path>
+                        <path d="M-0.06,0 L169.15,0" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.40;"></path>
+                    </svg>
+                    <div class="hce" style="left:0mm;top:0mm;width:29.56mm;height:12.42mm;">
+                        <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                            <div class="hcI" style="top:3.60mm;">
+                                <div class="hls ps22" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:25.95mm;">
+                                    <span class="hrt cs7">개선 안건</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hce" style="left:29.56mm;">
+                        {{qboard.b_subject}}                                        
+                    </div>
+                    <div class="hce" style="left:110.80mm;top:0mm;width:21.65mm;height:12.42mm;">
+                        <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                            <div class="hcI" style="top:3.60mm;">
+                                <div class="hls ps22" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:18.05mm;">
+                                    <span class="hrt cs7">업무팀명</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hce" style="left:132.45mm;top:0mm;width:36.64mm;height:12.42mm;">
+                        <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                            <div class="hcI" style="top:3.60mm;">
+                                <div class="hls ps22" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:33.03mm;">
+                                    <span class="hrt cs7">훈련지원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hce" style="left:0mm;top:12.42mm;width:29.56mm;height:23.14mm;">
+                        <div class="hcD" style="left:1.80mm;top:0.50mm;">
+                            <div class="hcI" style="top:8.96mm;">
+                                <div class="hls ps22" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:25.95mm;">
+                                    <span class="hrt cs7">제안 목적&nbsp;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hce" style="left:29.56mm;top:12.42mm;width:139.53mm;height:23.14mm;">
+                        {{qboard.b_content}}
+                    </div>
+                    <div class="hce" style="left:0mm;top:35.57mm;width:29.56mm;height:8.78mm;"><div class="hcD" style="left:1.80mm;top:0.50mm;"><div class="hcI" style="top:1.77mm;"><div class="hls ps16" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:25.95mm;"><span class="hrt cs7">구 &nbsp;분</span></div></div></div></div><div class="hce" style="left:29.56mm;top:35.57mm;width:139.53mm;height:8.78mm;"><div class="hcD" style="left:1.80mm;top:0.50mm;"><div class="hcI" style="top:1.77mm;"><div class="hls ps16" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:135.93mm;"><span class="hrt cs7">내 &nbsp;용</span></div></div></div></div><div class="hce" style="left:0mm;top:44.35mm;width:29.56mm;height:100.80mm;"><div class="hcD" style="left:1.80mm;top:0.50mm;"><div class="hcI" style="top:44.40mm;"><div class="hls ps17" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:25.95mm;"><span class="hrt cs7">1. LMS 개발&nbsp;</span></div><div class="hls ps17" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:6.56mm;height:4.23mm;width:25.95mm;"><span class="hrt cs7">시 개선제안</span></div></div></div></div><div class="hce" style="left:29.56mm;top:44.35mm;width:139.53mm;height:100.80mm;"><div class="hcD" style="left:1.80mm;top:0.50mm;"><div class="hcI" style="top:44.19mm;"><div class="hls ps24" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:135.93mm;"><span class="hrt cs7">양질의 콘텐츠를 다양한 방법으로 훈련생에게 서비스 하기위해 링크&nbsp;</span></div><div class="hls ps24" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:6.98mm;height:4.23mm;width:135.93mm;"><span class="hrt cs7">콘텐츠 서비스도 가능하게 요청</span></div></div></div></div><div class="hce" style="left:0mm;top:145.15mm;width:29.56mm;height:28.49mm;"><div class="hcD" style="left:1.80mm;top:0.50mm;"><div class="hcI" style="top:11.63mm;"><div class="hls ps17" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:25.95mm;"><span class="hrt cs7">2. 기타</span></div></div></div></div><div class="hce" style="left:29.56mm;top:145.15mm;width:139.53mm;height:28.49mm;"><div class="hcD" style="left:1.80mm;top:0.50mm;"><div class="hcI" style="top:11.63mm;"><div class="hls ps23" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:135.93mm;"><span class="hrt cs7">작업요청 게시판&nbsp;</span></div></div></div></div><div class="hce" style="left:0mm;top:173.64mm;width:169.09mm;height:16.23mm;"><div class="hcD" style="left:1.80mm;top:0.50mm;"><div class="hcI" style="top:5.50mm;"><div class="hls ps25" style="line-height:3.43mm;white-space:nowrap;left:0mm;top:-0.21mm;height:4.23mm;width:165.48mm;"><span class="hrt cs7">끝.</span></div></div></div></div></div></div>
+                                
+        {% endblock %}
+{% block script %}
+
+<script type='text/javascript'>
+function sungin(gubun,qboard_id,approve) {
+    
+    $.ajax({
+        type:'POST',
+        url:'/board/approve_list/ajax_sungin/',
+        data:{
+            'gubun':gubun,  
+            'qboard_id':qboard_id,
+            'approve': approve,
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success:function(json){
+             console.log("data pass success",json);
+            //alert("성공적으로 처리되었습니다.");
+        },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); 
+        }
+    });
+}
+
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+const examine_elements = document.getElementById("examine");
+    examine_elements.addEventListener('click', function() {
+        if(this.checked) {
+            if(confirm("검토자 승인 하시겠습니까?")) {
+                // location.href = "/board/approve_update/{{ qboard.id }}/2/Y";                
+                sungin('examine','{{ qboard.id }}','Y');
+            } else {
+                this.checked = false;
+            }
+        } else {
+            if(confirm("검토자 승인 취소 하시겠습니까?")) {
+               sungin('examine','{{ qboard.id }}','N  ');               
+            } else {
+                this.checked = true;
+            }
+        }
+    });
+const check_elements = document.getElementById("check");
+    check_elements.addEventListener('click', function() {
+        if(this.checked) {
+            if(confirm("확인자 승인 하시겠습니까?")) {
+                // location.href = "/board/approve_update/{{ qboard.id }}/2/Y";                
+                sungin('check','{{ qboard.id }}','Y');
+            } else {
+                this.checked = false;
+            }
+        } else {
+            if(confirm("확인자 승인 취소 하시겠습니까?")) {
+               sungin('check','{{ qboard.id }}','N  ');               
+            } else {
+                this.checked = true;
+            }
+        }
+    });
+/*
+const recommend_elements = document.getElementsByClassName("recommend");
+Array.from(recommend_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 추천하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+*/
+
+/*
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('dpage').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+    });
+});
+*/
+
+
+
+//댓글
+/* 
+const comment_elements = document.getElementById("btn_qcomment");
+
+    comment_elements.addEventListener('click', function() {
+         $("#qcomment_form").show()        
+    });
+
+//댓글
+
+        
+        
+*/
+/* 
+
+function acomment(answerid) {    
+    $(".acomment_form").hide();    
+    $("#acomment_form_"+answerid).show()
+    
+}
+*/
+</script>
+{% endblock %}

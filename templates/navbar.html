@@ -30,6 +30,9 @@
                 <li>
                     <a class="nav-link" href="{% url 'board:b_list' category_id=2 %}">개선보고서</a>                    
                 </li>
+                <li>
+                    <a class="nav-link" href="{% url 'board:approve_list'%}">결제하기</a>                    
+                </li>
                 {%else%}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'common:login' %}">로그인</a>

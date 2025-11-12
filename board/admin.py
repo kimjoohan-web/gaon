@@ -6,6 +6,8 @@ from django.contrib import admin
 
 from .models import Q_board
 from .models import Category
+from .models import Jik_gread
+from .models import Approve
 
 # class QuestionAdmin(admin.ModelAdmin):
 #     search_fields =['subject']
@@ -13,3 +15,5 @@ from .models import Category
 
 admin.site.register(Q_board)
 admin.site.register(Category)
+admin.site.register(Jik_gread)
+admin.site.register(Approve)  

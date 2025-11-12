@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load pybo_filter %}
+{% block content %}
+
+<div class="container my-3">
+    <!-- message 표시 -->
+    {% if messages %}
+    <div class="alert alert-danger my-3" role="alert">
+    {% for message in messages %}
+        <strong>{{ message.tags }}</strong>
+        <ul><li>{{ message.message }}</li></ul>
+    {% endfor %}
+    </div>
+    {% endif %}
+    <!-- 질문 -->
+    <h2 class="border-bottom py-2">{{ qboard.b_subject }} 결제하기</h2>    
+    <div class="mb-3">작성자 : {{ qboard.b_name.username}}    </div>
+    <div class="mb-3">게시일 : {{ qboard.b_create_date}}</div>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" >{{ qboard.b_content|mark }}</div>            
+        </div>
+    </div>
+    <div class="mb-3">
+            <label for="subject" class="form-label">장애구분</label>
+            {{ qboard.b_err_gubun}} 
+    </div>
+    <div class="mb-3">관련 링크 : {{ qboard.b_link_one}}</div>
+    <div class="mb-3">관련 링크 : {{ qboard.b_link_two}}</div>
+    <div class="mb-3">관련 파일 : <a href="/board/download?path={{ qboard.b_file_one}}">{{qboard.b_file_one}}</a> </div>
+    <div class="mb-3">관련 파일 : <a href="/board/download?path={{ qboard.b_file_two}}">{{qboard.b_file_two}}</a> </div>
+    <div class="mb-3">관련 파일 : <a href="/board/download?path={{ qboard.b_file_three}}">{{qboard.b_file_three}}</a> </div>
+    
+    
+    <div class="my-3">
+        <a href="{% url 'board:approve_list' %}" class="btn btn-sm btn-outline-secondary">목록</a>
+    </div>
+</div>
+<div class="container my-3">
+  
+ 
+    <div class="my-3">검토자 승인 : <input type="checkbox" value="Y" id="examine" name = "examine"   {%if 2 != j_jik %} disabled {%endif%} {% if 'Y' == examine %} checked {% endif %}> </div>
+    
+    <div class="my-3">확인자 승인 : <input type="checkbox" value="Y" id="check" name = "check" {%if 3 != j_jik %} disabled {%endif%} {%if 'Y' == check %} checked {% endif %}></div>
+
+
+</div>
+
+    
+
+{% endblock %}
+{% block script %}
+
+<script type='text/javascript'>
+function sungin(gubun,qboard_id,approve) {
+    
+    $.ajax({
+        type:'POST',
+        url:'/board/approve_list/ajax_sungin/',
+        data:{
+            'gubun':gubun,  
+            'qboard_id':qboard_id,
+            'approve': approve,
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success:function(json){
+             console.log("data pass success",json);
+            //alert("성공적으로 처리되었습니다.");
+        },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); 
+        }
+    });
+}
+
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+const examine_elements = document.getElementById("examine");
+    examine_elements.addEventListener('click', function() {
+        if(this.checked) {
+            if(confirm("검토자 승인 하시겠습니까?")) {
+                // location.href = "/board/approve_update/{{ qboard.id }}/2/Y";                
+                sungin('examine','{{ qboard.id }}','Y');
+            } else {
+                this.checked = false;
+            }
+        } else {
+            if(confirm("검토자 승인 취소 하시겠습니까?")) {
+               sungin('examine','{{ qboard.id }}','N  ');               
+            } else {
+                this.checked = true;
+            }
+        }
+    });
+const check_elements = document.getElementById("check");
+    check_elements.addEventListener('click', function() {
+        if(this.checked) {
+            if(confirm("확인자 승인 하시겠습니까?")) {
+                // location.href = "/board/approve_update/{{ qboard.id }}/2/Y";                
+                sungin('check','{{ qboard.id }}','Y');
+            } else {
+                this.checked = false;
+            }
+        } else {
+            if(confirm("확인자 승인 취소 하시겠습니까?")) {
+               sungin('check','{{ qboard.id }}','N  ');               
+            } else {
+                this.checked = true;
+            }
+        }
+    });
+/*
+const recommend_elements = document.getElementsByClassName("recommend");
+Array.from(recommend_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 추천하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+*/
+
+/*
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('dpage').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+    });
+});
+*/
+
+
+
+//댓글
+/* 
+const comment_elements = document.getElementById("btn_qcomment");
+
+    comment_elements.addEventListener('click', function() {
+         $("#qcomment_form").show()        
+    });
+
+//댓글
+
+        
+        
+*/
+/* 
+
+function acomment(answerid) {    
+    $(".acomment_form").hide();    
+    $("#acomment_form_"+answerid).show()
+    
+}
+*/
+</script>
+{% endblock %}

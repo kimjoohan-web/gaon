@@ -29,3 +29,20 @@ class Q_board(models.Model):
     b_cnt = models.IntegerField()    
     def __str__(self):
         return self.b_subject
+    
+
+
+class Jik_gread(models.Model):
+    j_id = models.ForeignKey(User,on_delete=models.CASCADE)
+    j_gread = models.IntegerField()
+    j_name = models.CharField(max_length=50)
+    j_yn = models.CharField(max_length=1)
+   
+    
+
+class Approve(models.Model):
+    a_board = models.ForeignKey(Q_board,on_delete=models.CASCADE)    
+    a_jik = models.ForeignKey(Jik_gread,on_delete=models.CASCADE)
+    a_approve = models.CharField(max_length=1)    
+    a_approve_date = models.DateTimeField(null=True, blank=True)    
+    
