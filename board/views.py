@@ -15,10 +15,10 @@ from urllib.parse import quote
 from django import forms # 추가
 from django_summernote.widgets import SummernoteWidget # 추가
 import requests
-from pyhwpx import Hwp
+# from pyhwpx import Hwp
 from bs4 import BeautifulSoup
 from PIL import Image, ImageDraw, ImageFont
-import pyhwpx
+# import pyhwpx
 
 form_article = forms.modelform_factory( # 글 작성과 편집에 사용하는 form
     Q_board, # form에 사용되는 model
@@ -334,57 +334,58 @@ def ajax_sungin(request):
 
 @login_required(login_url='common:login')
 def approve_print(request,qboard_id):
+    pass
 
-    hwp = Hwp()
+    # hwp = Hwp()
     
-    path = 'hwpex/LMS 개발 제안보고서.hwp'
-    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    # path = 'hwpex/LMS 개발 제안보고서.hwp'
+    # file_path = os.path.join(settings.MEDIA_ROOT, path)
 
 
-    oldFile = hwp.Open(file_path)
-    # file_name =f"{gi_su}수_수료보고_{company_name}.hwp"
+    # oldFile = hwp.Open(file_path)
+    # # file_name =f"{gi_su}수_수료보고_{company_name}.hwp"
     
     
 
 
-    SQL = "SELECT A.* "
-    SQL += "	  ,CASE WHEN IFNULL(B.A_APPROVE,'N') = 'N' THEN  '검토중' ELSE '검토확인' END   AS examine "
-    SQL += "	  ,CASE WHEN IFNULL(C.A_APPROVE,'N') ='N' THEN '확인중' ELSE '확인완료' END  AS che  "
-    SQL += " FROM BOARD_Q_BOARD A "
-    SQL += " LEFT JOIN BOARD_APPROVE B ON A.ID=B.A_BOARD_ID AND B.A_JIK_ID=2 "
-    SQL += " LEFT JOIN BOARD_APPROVE C ON A.ID = C.A_BOARD_ID AND C.A_JIK_ID=3 "    
-    SQL += " WHERE A.id = %s " % qboard_id
-    qboard = Q_board.objects.raw(SQL)
-    b_date = qboard[0].b_create_date.strftime('%Y-%m-%d')
-    b_name = qboard[0].b_name.username  
-    b_subject = qboard[0].b_subject
-    # url = "board/approve_content.html"
-    # url = "http://127.0.0.1:8000/board/approve_list/approve_content/" + str(qboard_id) + "/"
-    # response = requests.get(url)
-    # b_content =  qboard[0].b_content
-    # b_content =  BeautifulSoup(response.text, 'html.parser').get_text()
-    b_content =  BeautifulSoup(qboard[0].b_content, 'html.parser')
+    # SQL = "SELECT A.* "
+    # SQL += "	  ,CASE WHEN IFNULL(B.A_APPROVE,'N') = 'N' THEN  '검토중' ELSE '검토확인' END   AS examine "
+    # SQL += "	  ,CASE WHEN IFNULL(C.A_APPROVE,'N') ='N' THEN '확인중' ELSE '확인완료' END  AS che  "
+    # SQL += " FROM BOARD_Q_BOARD A "
+    # SQL += " LEFT JOIN BOARD_APPROVE B ON A.ID=B.A_BOARD_ID AND B.A_JIK_ID=2 "
+    # SQL += " LEFT JOIN BOARD_APPROVE C ON A.ID = C.A_BOARD_ID AND C.A_JIK_ID=3 "    
+    # SQL += " WHERE A.id = %s " % qboard_id
+    # qboard = Q_board.objects.raw(SQL)
+    # b_date = qboard[0].b_create_date.strftime('%Y-%m-%d')
+    # b_name = qboard[0].b_name.username  
+    # b_subject = qboard[0].b_subject
+    # # url = "board/approve_content.html"
+    # # url = "http://127.0.0.1:8000/board/approve_list/approve_content/" + str(qboard_id) + "/"
+    # # response = requests.get(url)
+    # # b_content =  qboard[0].b_content
+    # # b_content =  BeautifulSoup(response.text, 'html.parser').get_text()
+    # b_content =  BeautifulSoup(qboard[0].b_content, 'html.parser')
     
-    # b_content =  qboard[0].b_content  
+    # # b_content =  qboard[0].b_content  
 
-    examine = '검토중'
-    che = '확인중'  
-    file_name =f"개발 제안보고서_{b_date}.hwp"
-    hwp.put_field_text("b_date", b_date)
-    hwp.put_field_text("examine", examine)
-    hwp.put_field_text("che", che)
-    hwp.put_field_text("subject", b_subject)
-    # hwp.put_field_text("contents", BeautifulSoup(b_content,'html.parser').get_text())
-    # hwp.put_field_text("contents", b_content)
-    hwp.MoveToField("contents")
-    hwp.InsertPicture(settings.MEDIA_ROOT + '/img/screenshot3.png', 100, 30)  # 이미지 삽입
-    hwp.SaveAs(file_name,format="HTML+", split_page=False) 
+    # examine = '검토중'
+    # che = '확인중'  
+    # file_name =f"개발 제안보고서_{b_date}.hwp"
+    # hwp.put_field_text("b_date", b_date)
+    # hwp.put_field_text("examine", examine)
+    # hwp.put_field_text("che", che)
+    # hwp.put_field_text("subject", b_subject)
+    # # hwp.put_field_text("contents", BeautifulSoup(b_content,'html.parser').get_text())
+    # # hwp.put_field_text("contents", b_content)
+    # hwp.MoveToField("contents")
+    # hwp.InsertPicture(settings.MEDIA_ROOT + '/img/screenshot3.png', 100, 30)  # 이미지 삽입
+    # hwp.SaveAs(file_name,format="HTML+", split_page=False) 
     
-    hwp.close()
-    context ={'qboard':qboard[0]}     
-    # return render(request,'board/approve_print.html',context)
-    # return render(request,'board/approve_print.html',context)
-    return FileResponse(open(file_name, 'rb'), as_attachment=True, filename=file_name)
+    # hwp.close()
+    # context ={'qboard':qboard[0]}     
+    # # return render(request,'board/approve_print.html',context)
+    # # return render(request,'board/approve_print.html',context)
+    # return FileResponse(open(file_name, 'rb'), as_attachment=True, filename=file_name)
 
 
     
