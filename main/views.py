@@ -20,4 +20,4 @@ from django.db.models import Q
 #     return render(request,'main/main.html',context)
 
 def index(request):
-  return HttpResponse(request,'안녕하세요')
+  return HttpResponse('안녕하세요')
