@@ -9,7 +9,7 @@ urlpatterns =[
     # path('signup/', views.signup,name='signup'),
     # path('forgot_password/', views.forgot_password,name='forgot_password'), 
     # path('pwd_change/', views.pwd_change,name='pwd_change'), 
-    path('', views.index, name='index'),
+    # path('', views.index, name='index'),
     
     
     
