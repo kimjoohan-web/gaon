@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin 
 from django.urls import path,include
 from pybo.views import base_views
-from main import views
+from main.views import views
 
 from django.conf.urls.static import static
 from django.conf import settings
@@ -29,7 +29,7 @@ urlpatterns = [
     path('common/', include('common.urls')),
     # path('', base_views.index, name='index'),  # '/' 에 해당되는 path
     path('categoryView/', base_views.categoryView, name='categoryView'),  # '/' 에 해당되는 path
-    path ('', views.index,name='index'), # 메인 페이지
+    path ('', include('main.urls')), # 메인 페이지
     path('board/', include('board.urls')),
     # path('pybo/', include('pybo.urls')),
     path('chat/', include('chat.urls')),
