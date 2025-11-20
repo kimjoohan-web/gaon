@@ -29,7 +29,7 @@ urlpatterns = [
     path('common/', include('common.urls')),
     # path('', base_views.index, name='index'),  # '/' 에 해당되는 path
     path('categoryView/', base_views.categoryView, name='categoryView'),  # '/' 에 해당되는 path
-    path ('',views.index,include('main.urls')), # 메인 페이지
+    path ('', views.index,name='index'), # 메인 페이지
     path('board/', include('board.urls')),
     # path('pybo/', include('pybo.urls')),
     path('chat/', include('chat.urls')),
