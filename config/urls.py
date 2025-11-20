@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin 
 from django.urls import path,include
 from pybo.views import base_views
-from main.views import views
+from main import views
 
 from django.conf.urls.static import static
 from django.conf import settings
