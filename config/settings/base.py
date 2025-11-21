@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     
 ]
 
-
+ROOT_URLCONF = 'config.urls'
 MIDDLEWARE = [
     
     'django.middleware.security.SecurityMiddleware',
@@ -70,7 +70,7 @@ MIDDLEWARE = [
 
 ]
 
-ROOT_URLCONF = 'config.urls'
+
 
 TEMPLATES = [
     {
@@ -87,7 +87,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+
 
 
 # Database
@@ -141,7 +141,7 @@ STATICFILES_DIRS = [
 ]
 
 #STATIC_ROOT = 'static/'
-STATIC_ROOT=os.path.join(BASE_DIR,'static')
+STATIC_ROOT=os.path.join(BASE_DIR,'/static/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -156,7 +156,7 @@ LOGIN_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 ASGI_APPLICATION = 'config.asgi.application'
-
+WSGI_APPLICATION = 'config.wsgi.application'
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
