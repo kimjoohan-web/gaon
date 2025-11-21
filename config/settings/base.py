@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -30,7 +31,7 @@ SECRET_KEY = 'django-insecure-ex^^ijm7y(x^9(d3f%9*%v4_$f_ibf2e1t*7df($t)+*@y$n=p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.219.50','127.0.0.1','43.201.147.160']
+ALLOWED_HOSTS = ['43.201.147.160']
 
 
 # Application definition
@@ -139,7 +140,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-STATIC_ROOT = 'static/'
+#STATIC_ROOT = 'static/'
+STATIC_ROOT=os.path.join(BASE_DIR,"/static/")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
