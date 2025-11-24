@@ -38,8 +38,8 @@ ALLOWED_HOSTS = ['43.201.147.160']
 
 INSTALLED_APPS = [  
     'corsheaders',
-    'channels',
-    'daphne',
+    #'channels',
+    #'daphne',
     'django_summernote',
     'board.apps.BoardConfig',
     'main.apps.MainConfig',  
@@ -51,8 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chat',
-    'rest_framework',
+    # 'chat',
+    # 'rest_framework',
     
     
 ]

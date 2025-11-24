@@ -32,12 +32,12 @@ urlpatterns = [
     path ('', include('main.urls')), # 메인 페이지
     path('board/', include('board.urls')),
     # path('pybo/', include('pybo.urls')),
-    path('chat/', include('chat.urls')),
+    # path('chat/', include('chat.urls')),
     path('cale/', include('cale.urls')),
 
     
     
-] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 def get_filename(filename):
