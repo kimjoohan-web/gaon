@@ -1,4 +1,4 @@
-from ..settings import *
+
 from .base import *
 ALLOWED_HOSTS = ['43.201.147.160']
 STATIC_ROOT = BASE_DIR / 'static/'
