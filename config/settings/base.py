@@ -15,6 +15,9 @@ import os
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
+
+
 
 
         
@@ -58,6 +61,8 @@ INSTALLED_APPS = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+
 MIDDLEWARE = [
     
     'django.middleware.security.SecurityMiddleware',
