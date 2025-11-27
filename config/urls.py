@@ -21,6 +21,8 @@ from main import views
 from django.conf import settings
 from config.settings.base import *
 from django.conf.urls.static import static
+from django.views.static import serve
+from django.urls import re_path
 # from pybo import views
 urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
@@ -35,10 +37,11 @@ urlpatterns = [
     # path('pybo/', include('pybo.urls')),
     # path('chat/', include('chat.urls')),
     path('cale/', include('cale.urls')),
-
+    
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 
 
 def get_filename(filename):
