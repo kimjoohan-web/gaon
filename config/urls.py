@@ -19,6 +19,7 @@ from django.urls import path,include
 from pybo.views import base_views
 from main import views
 from django.conf import settings
+from config.settings.base import *
 from django.conf.urls.static import static
 # from pybo import views
 urlpatterns = [
