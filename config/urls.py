@@ -18,9 +18,8 @@ from django.contrib import admin
 from django.urls import path,include
 from pybo.views import base_views
 from main import views
-
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls.static import static
 # from pybo import views
 urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
