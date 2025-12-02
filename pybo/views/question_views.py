@@ -55,7 +55,7 @@ def question_delete(request, category_id,question_id):
         messages.error(request, '삭제권한이 없습니다')
         return redirect('pybo:detail',category_id=category_id,question_id=question.id)
     question.delete()
-    return redirect('pybo:index',category_id=category_id)
+    return redirect('pybo:list',category_id=category_id)
 
 
 
