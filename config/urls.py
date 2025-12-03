@@ -37,6 +37,7 @@ urlpatterns = [
     # path('pybo/', include('pybo.urls')),
     # path('chat/', include('chat.urls')),
     path('cale/', include('cale.urls')),
+    path('gaonsample/', include('gaonsample.urls')),
     
     
     
