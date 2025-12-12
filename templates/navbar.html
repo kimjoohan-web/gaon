@@ -33,6 +33,9 @@
                 <li>
                     <a class="nav-link" href="{% url 'board:approve_list'%}">결제하기</a>                    
                 </li>
+                <li>
+                    <a class="nav-link" href="{% url 'mt:index' %}">수료현황</a>                    
+                </li>
                 {%else%}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
@@ -40,9 +43,12 @@
                 <li>
                     <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>                    
                 </li>
-                {%endif%}
-                </li>
                 
+                {%endif%}
+               
+                <li>
+                    <a class="nav-link" href="{% url 'gaonsample:index' %}">샘플</a>                    
+                </li>
             </ul>
         </div>
     </div>

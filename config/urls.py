@@ -38,6 +38,7 @@ urlpatterns = [
     # path('chat/', include('chat.urls')),
     path('cale/', include('cale.urls')),
     path('gaonsample/', include('gaonsample.urls')),
+    path('mt/', include('mt.urls')),
     
     
     

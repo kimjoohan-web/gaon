@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
-    'django.contrib.messages',
+    'django.contrib.messages',    
+    'mt.apps.MtConfig',
+    'gaonsample.apps.GaonsampleConfig',
     
     # 'chat',
     # 'rest_framework',
