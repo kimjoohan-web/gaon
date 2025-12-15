@@ -12,7 +12,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
             <div class="container px-4">
-                <a class="navbar-brand" href="#page-top">gaon 안전보건</a>
+                <a class="navbar-brand" href="#page-top">수료보고 현황</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
@@ -44,7 +44,7 @@
                             <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
                         </div>&nbsp;
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="btn_ini">초기화</button>
+                            <button class="btn btn-outline-secondary" type="button" id="btn_ini">전체</button>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,8 @@
                         {{ su_list.paginator.count|sub:su_list.start_index|sub:forloop.counter0|add:1 }}
                     </td>
                     <!-- <td>{{ forloop.counter }}</td> -->
-                    <td class="text-center">{{ suyo.startdate  }} ~ {{ suyo.enddate  }}</td>
+                    <!-- <td class="text-center">{{ suyo.startdate  }} ~ {{ c }}</td> -->
+                     <td class="text-center">~ {{ suyo.enddate  }} 까지 ({{suyo.date_cha}} 일)</td>
                     <td >{{ suyo.c_idx }}</td>
                     <td >{{ suyo.s_title }}</td>
                     <td class="text-center text-danger fw-bold">{{ suyo.misu_total  }}</td>

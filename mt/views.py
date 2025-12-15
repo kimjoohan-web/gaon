@@ -13,13 +13,15 @@ def index(request):
     kw = request.GET.get('kw','')    
     subject_gubun = request.GET.get('subject_gubun','')    
     
-    
+    if subject_gubun is None or subject_gubun =='':
+        subject_gubun ='0'
     # category_list = Catogory.objects.all()
     # su_list = subject_db.objects.all().order_by('-s_idx')
 
     SQL ="select A.*,B.c_name,strftime('%Y-%m-%d', A.start_date) startdate " 
     SQL += " ,(A.sum_total-A.su_total) misu_total ,A.su_total ,A.etc_total "
     SQL += " ,strftime('%Y-%m-%d', A.end_date) enddate "
+    SQL += " ,cast((julianday(A.end_date) - julianday('now')) as INTEGER)  date_cha "
     SQL += " from mt_subject_db A LEFT JOIN mt_company_info B on A.c_idx_id=B.c_idx  "
     if kw:
         SQL += " where B.c_name like '%%"+kw+"%%' "
