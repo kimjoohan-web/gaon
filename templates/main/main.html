@@ -160,8 +160,8 @@
                             <div class="text-left my-5">
                                 <ul>
                                 {% if question_list_noti %}
-                                     {% for question_two in question_list_noti %}
-                                    <li><a href="{% url 'pybo:detail' question_two.category.id question_two.id  %}">{{ question_list_noti.subject }}</a>({{ question_two.create_date }})</li>
+                                     {% for question_noti in question_list_noti %}
+                                    <li><a href="{% url 'pybo:detail' question_noti.category.id question_noti.id  %}">{{ question_list_noti.subject }}</a>({{ question_two.create_date }})</li>
                                     {%endfor%}
                                 {%else%}
                                     <li>등록된 공지가 없습니다.</li>
