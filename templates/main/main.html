@@ -156,6 +156,19 @@
                     <div class="row gx-5 justify-content-center">
 
                         <div class="col-xxl-8">
+                            <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">공지</span></h2>
+                            <div class="text-left my-5">
+                                <ul>
+                                {% if question_list_noti %}
+                                     {% for question_two in question_list_noti %}
+                                    <li><a href="{% url 'pybo:detail' question_two.category.id question_two.id  %}">{{ question_list_noti.subject }}</a>({{ question_two.create_date }})</li>
+                                    {%endfor%}
+                                {%else%}
+                                    <li>등록된 공지가 없습니다.</li>
+                                {%endif%}
+                                </ul>
+                            </div>
+
                              <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">Q & A</span></h2>
                             <div class="my-5">
                                 <ul>

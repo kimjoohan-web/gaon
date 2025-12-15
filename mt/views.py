@@ -11,7 +11,7 @@ def index(request):
     
     page = request.GET.get('page', '1')  # 페이지    
     kw = request.GET.get('kw','')    
-    
+    subject_gubun = request.GET.get('subject_gubun','')    
     
     
     # category_list = Catogory.objects.all()
@@ -24,7 +24,12 @@ def index(request):
     if kw:
         SQL += " where B.c_name like '%%"+kw+"%%' "
         SQL += " or A.s_title like '%%"+kw+"%%' "
-        
+
+    if subject_gubun :
+        if 'where' in SQL:
+            SQL += " and A.s_gubun = "+subject_gubun+" "
+        else:
+            SQL += " where A.s_gubun = "+subject_gubun+" "    
     
     SQL += " order by A.s_idx desc "
     su_list = subject_db.objects.raw(SQL)
@@ -33,5 +38,5 @@ def index(request):
     paginator = Paginator(su_list, 10)  # 페이지당 10개씩 보여주기
     page_obj = paginator.get_page(page)
 
-    context ={'su_list':page_obj,'page':page,'kw':kw }
+    context ={'su_list':page_obj,'page':page,'kw':kw ,'subject_gubun':subject_gubun}
     return render(request, 'mt/index.html',context)
