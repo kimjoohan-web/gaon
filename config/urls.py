@@ -39,6 +39,7 @@ urlpatterns = [
     path('cale/', include('cale.urls')),
     path('gaonsample/', include('gaonsample.urls')),
     path('mt/', include('mt.urls')),
+    path('manager/', include('manager.urls')),
     
     
     

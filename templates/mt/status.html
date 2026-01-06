@@ -1,0 +1,187 @@
+{% extends 'base_popup.html' %}
+{% load pybo_filter %}
+{% load static %}
+{% block content %}
+        <link href="{% static 'css/gstyles.css' %}" rel="stylesheet" />
+        <script>
+            function pop_sample(url,name){
+                var popOption = "'scrollbars=no, resizable=no, left=100, width=1212, height=850'";
+                window.open(url,name,popOption);
+            }
+        </script>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="#page-top">수료보고 현황</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-primary bg-gradient text-white">
+            <div class="container px-2 text-center">
+                <h1 class="fw-bolder">사업주 과정 수료현황 </h1>
+            </div>
+        </header>
+        <div class="container my-3">
+            <div class="row my-3">    
+                <div class="col-auto">
+                    <div class="input-group">
+                        <select  class="form-control" name="subject_gubun_kw" id="subject_gubun_kw">
+                            <option value="">선택해 주세요</option>
+                            <option value=0 {%if '0' == subject_gubun %} selected {%endif%}>직무능력</option>                            
+                            <option value=1 {%if '1' == subject_gubun %} selected {%endif%}>산업안전</option>
+                        </select>&nbsp;
+                        <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
+                        &nbsp;
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                        </div>&nbsp;
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="btn_ini">전체</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table" >
+                <thead class="sticky-top" >
+                <tr class="text-center table-dark" >
+                    <th>번호</th>
+                    <th>수강기간</th>
+                    <th style="width:20%">사명</th>
+                    <th style="width:35%">과정명</th>
+                    <th>미수료</th>
+                    <th>수료</th>
+                    <th>총합계</th>
+                </tr>
+                </thead>
+                <tbody>           
+                    {{status_to}}
+                {%if su_list %}
+                {% for suyo in su_list %}
+                <tr>
+                    <td class="text-center">
+                        <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                        {{ su_list.paginator.count|sub:su_list.start_index|sub:forloop.counter0|add:1 }}
+                    </td>
+                    <!-- <td>{{ forloop.counter }}</td> -->
+                    <!-- <td class="text-center">{{ suyo.startdate  }} ~ {{ c }}</td> -->
+                     <td class="text-center">~ {{ suyo.enddate  }} 까지</td>
+                    <td >{{ suyo.c_idx }}</td>
+                    <td >{{ suyo.s_title }}</td>
+                    <td class="text-center text-danger fw-bold">{{ suyo.misu_total  }}</td>
+                    <td class="text-center text-success fw-bold">{{ suyo.su_total  }}</td>
+                    <td class="text-center">{{ suyo.sum_total }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="7">사업주가 없습니다.</td>
+                </tr>
+                {% endif %}
+                </tbody>
+            </table>
+            <!-- 페이징처리 시작 -->
+            <ul class="pagination justify-content-center">
+                <!-- 이전페이지 -->
+                {% if su_list.has_previous %}
+                <li class="page-item">
+                    <!-- <a class="page-link" href="?page={{ su_list.previous_page_number }}">이전</a> -->
+                    <a class="page-link" data-page="{{ su_list.previous_page_number }}" href="javascript:void(0)">이전</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <!-- <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a> -->
+                    <a class="page-link" tabindex="-1" aria-disabled="true"     href="javascript:void(0)">이전</a>
+                </li>
+                {% endif %}
+                <!-- 페이지리스트 -->
+                {% for page_number in su_list.paginator.page_range %}
+                {% if page_number >= su_list.number|add:-5 and page_number <= su_list.number|add:5 %}
+                {% if page_number == su_list.number %}
+                <li class="page-item active" aria-current="page">
+                    <!-- <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a> -->
+                    <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">{{ page_number }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <!-- <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a> -->
+                    <a class="page-link" data-page="{{ page_number }}"   href="javascript:void(0)">{{ page_number }}</a>
+                </li>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                <!-- 다음페이지 -->
+                
+            </ul>
+            <!-- 페이징처리 끝 -->
+        <form id="searchForm" method="get" action="{% url 'mt:index' %}">
+            <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+            <input type="hidden" id="page" name="page" value="{{ page }}">
+            <input type="hidden" id="subject_gubun" name="subject_gubun" value="{{ subject_gubun }}">
+            
+        </form>
+        </div>
+
+      
+        
+        <!-- Contact section-->
+        <section id="contact">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2>Contact us</h2>
+                        <p class="lead">
+                            가온원격평생교육원<br>
+                            대표이사: 김승완 사업자등록번호 : 192-81-03417 <br>통신판매업신고번호 : 제2025-서울강서-0465호<br>
+                            TEL : 1522-9818 <br>
+                            Email : gaon@gaongn.net<br>
+                            서울특별시 강서구 마곡중앙로171, 마곡나루역프라이빗타워Ⅱ 617-618호<br>
+                            
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+  
+{% endblock %}
+{% block script %}
+ <!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<!-- <script src="js/scripts.js"></script> -->
+<script src="{% static 'js/gscripts.js' %}"></script>
+
+<script type='text/javascript'>
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('page').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+    });
+});
+const btn_search = document.getElementById("btn_search");
+btn_search.addEventListener('click', function() {
+    document.getElementById('kw').value = document.getElementById('search_kw').value;
+    document.getElementById('subject_gubun').value = document.getElementById('subject_gubun_kw').value;
+    document.getElementById('page').value = 1;  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+    document.getElementById('searchForm').submit();
+});
+const btn_ini = document.getElementById("btn_ini");
+btn_ini.addEventListener('click', function() {
+    document.getElementById('kw').value = '';
+    document.getElementById('subject_gubun').value = '';
+    document.getElementById('page').value = 1;  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+    document.getElementById('searchForm').submit();
+});
+</script>
+{% endblock %}

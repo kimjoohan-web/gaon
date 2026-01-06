@@ -5,6 +5,6 @@ from . import views
 app_name = 'mt'
 urlpatterns =[
     path('', views.index, name='index'),    
-    
-    
+    path('status/', views.status, name='status'),    
+
 ]

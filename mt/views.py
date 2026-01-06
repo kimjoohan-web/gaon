@@ -1,10 +1,11 @@
+from urllib import request, response
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from .models import company_info, subject_db
 from django.shortcuts import render
-
+import requests
 # Create your views here.
 @login_required(login_url='common:login')
 def index(request):
@@ -42,3 +43,14 @@ def index(request):
 
     context ={'su_list':page_obj,'page':page,'kw':kw ,'subject_gubun':subject_gubun}
     return render(request, 'mt/index.html',context)
+
+
+
+def status(request):
+    url = 'http://apis.data.go.kr/B490007/emonService/stAgentYearlyService/stAgentYearlyInfo'
+    params ={'serviceKey' : '6e9bf5d2f8bdc3efb21e12e806094b3abb6f8b45c6104bf76282daa462df78ce', 'pageNo' : '1', 'numOfRow' : '10' }
+
+    response = requests.get(url, params=params)
+    context ={'status_to':response.content}
+    return render(request, 'mt/status.html',context)
+    # print(response.content)
