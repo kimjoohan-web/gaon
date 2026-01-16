@@ -90,15 +90,13 @@ def psecu_submit(request):
     else:
         
         # p_m_b 최대값 구하기
-        SQL = "select max(p_m_b) from psecu_pc_secu_title_db"
+        SQL = "select p_m_b,p_wb_idx from psecu_pc_secu_title_db order by p_m_b DESC LIMIT 1"
         ps_b = pc_secu_title_db.objects.raw(SQL)
         p_m_b = 1
-        if not ps_b:
-            p_m_b = 1
-        else :
-            for b in ps_b:
-                p_m_b = b.p_m_b
-
+        for b in ps_b:
+            p_m_b = b.p_m_b
+        
+        
         SQL ="select  " 
         SQL += "p_m_idx"
         SQL += ",p_m_b"
