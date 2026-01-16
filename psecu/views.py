@@ -93,10 +93,12 @@ def psecu_submit(request):
         SQL = "select max(p_m_b) from psecu_pc_secu_title_db"
         ps_b = pc_secu_title_db.objects.raw(SQL)
         p_m_b = 1
-        for b in ps_b:
-            p_m_b = b.p_m_b
-        
-        
+        if not ps_b:
+            p_m_b = 1
+        else :
+            for b in ps_b:
+                p_m_b = b.p_m_b
+
         SQL ="select  " 
         SQL += "p_m_idx"
         SQL += ",p_m_b"
