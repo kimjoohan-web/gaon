@@ -40,6 +40,7 @@ urlpatterns = [
     path('gaonsample/', include('gaonsample.urls')),
     path('mt/', include('mt.urls')),
     path('manager/', include('manager.urls')),
+    path('psecu/', include('psecu.urls')),
     
     
     

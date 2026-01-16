@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load pybo_filter %}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row my-3">
+        <div class="col text-center">
+            <h2>직원 PC보안 매뉴얼 점검표(매주)</h2>
+        </div>
+        
+    </div>
+    <div class="row my-3">        
+        <div class="col-12">
+            개인정보보호 및 효율적인 보안업무 수행을 위해 정보통신시설에 포함된 기기는 아래의 매뉴얼에 따라 각 PC의 보안관리를 수행하여 주시고 점검하기 바랍니다.
+        </div>
+    </div>
+    
+    
+    
+    <table class="table">
+        <thead>
+        <tr class="text-center table-dark">
+            <th>번호</th>            
+            <th>글쓴이</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>           
+        {%if ps_list %}
+        {% for p_list in ps_list %}
+        <tr>
+            <td class="text-center">
+                <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                {{ ps_list.paginator.count|sub:ps_list.start_index|sub:forloop.counter0|add:1 }}
+            </td>
+            <!-- <td>{{ forloop.counter }}</td> -->
+            
+            <td class="text-center"><a href="{% url 'psecu:psecu_detail' p_list.p_wb_idx %}">{{ p_list.username  }}</a></td>
+            <td class="text-center">{{ p_list.p_wb_wdate|date:'Y-m-d' }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if ps_list.has_previous %}
+        <li class="page-item">
+            <!-- <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a> -->
+            <a class="page-link" data-page="{{ ps_list.previous_page_number }}" href="javascript:void(0)">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <!-- <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a> -->
+             <a class="page-link" tabindex="-1" aria-disabled="true"     href="javascript:void(0)">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in ps_list.paginator.page_range %}
+        {% if page_number >= ps_list.number|add:-5 and page_number <= ps_list.number|add:5 %}
+        {% if page_number == ps_list.number %}
+        <li class="page-item active" aria-current="page">
+            <!-- <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a> -->
+             <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <!-- <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a> -->
+             <a class="page-link" data-page="{{ page_number }}"   href="javascript:void(0)">{{ page_number }}</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if ps_list.has_next %}
+        <li class="page-item">
+            <!-- <a class="page-link" href="?page={{ ps_list.next_page_number }}">다음</a> -->
+             <a class="page-link" data-page="{{ ps_list.next_page_number }}"           href="javascript:void(0)">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <!-- <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a> -->
+             <a class="page-link" tabindex="-1" aria-disabled="true"   href="javascript:void(0)">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    
+  
+   
+   <input type="hidden" name="p_m_c_name" value="{{useridx}}">
+<div class="col-6">
+            <a href="{% url 'psecu:psecu_submit'%}" class="btn btn-primary">점검하기</a>
+</div>
+</div>
+
+{% endblock %}
+{% block script %}
+<!-- <script type='text/javascript'>
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('page').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+    });
+});
+const btn_search = document.getElementById("btn_search");
+btn_search.addEventListener('click', function() {
+    document.getElementById('kw').value = document.getElementById('search_kw').value;
+    document.getElementById('page').value = 1;  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+    document.getElementById('searchForm').submit();
+});
+</script> -->
+
+
+{% endblock %}

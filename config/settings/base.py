@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',    
     'mt.apps.MtConfig',
     'gaonsample.apps.GaonsampleConfig',
+    'manager.apps.ManagerConfig',
+    'psecu.apps.PsecuConfig',
     
     # 'chat',
     # 'rest_framework',
