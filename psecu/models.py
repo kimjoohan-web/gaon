@@ -22,6 +22,7 @@ class pc_secu_ck_db(models.Model):
     p_m_c_indate=models.DateTimeField()
     p_m_c_wdate=models.DateTimeField(null=True, blank=True)
     p_m_b=models.IntegerField()
+    p_wb_idx=models.IntegerField(null=True, blank=True) 
 
     def __str__(self):
         return self.p_m_c_val       

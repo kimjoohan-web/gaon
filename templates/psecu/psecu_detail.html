@@ -217,11 +217,15 @@
         success:function(json){            
             p_check = json.p_check;           
             if (p_check == 'Y'){
-                 alert("원장이 승인이 완료되었습니다.");
+                alert("원장이 승인이 완료되었습니다.");
+                $("#ch_check").removeClass("btn-primary").addClass("btn-success");
                 $("#review_check").removeClass("btn-primary").addClass("btn-success");
                 $("#review_check").text("승인취소");
+                $("#ch_check").text("승인취소");
             }else if (p_check == 'N') {
                 alert("원장의 승인이 취소되었습니다.");
+                $("#ch_check").removeClass("btn-success").addClass("btn-primary");
+                $("#ch_check").text("승인");
                 $("#review_check").removeClass("btn-success").addClass("btn-primary");
                 $("#review_check").text("승인");
             }else {

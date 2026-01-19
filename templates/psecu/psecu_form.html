@@ -58,11 +58,11 @@
                
             </td>  
             <td class="text-center">
-               <input type="radio" name="psecu_{{c_quest.p_m_idx}}" value="1" {% if c_quest.p_m_c_val == '1'   %} checked="checked"{% endif %}>
+               <input type="radio" class="psecu_{{c_quest.p_m_idx}}" name="psecu_{{c_quest.p_m_idx}}" value="1" {% if c_quest.p_m_c_val == '1'   %} checked="checked"{% endif %}>
                
             </td>
             <td class="text-center">
-               <input type="radio" name="psecu_{{c_quest.p_m_idx}}" value="0" {% if c_quest.p_m_c_val == '0' %}checked="checked"{% endif %}>               
+               <input type="radio" class="psecu_{{c_quest.p_m_idx}}" name="psecu_{{c_quest.p_m_idx}}" value="0" {% if c_quest.p_m_c_val == '0' %}checked="checked"{% endif %}>               
             </td>
                     
         </tr>
@@ -101,11 +101,11 @@
                
             </td>  
             <td class="text-center">
-               <input type="radio" name="psecu_{{u_quest.p_m_idx}}" value="1" {% if u_quest.p_m_c_val == '1' %}checked="checked"{% endif %} >
+               <input type="radio" class="psecu_{{u_quest.p_m_idx}}" name="psecu_{{u_quest.p_m_idx}}" value="1" {% if u_quest.p_m_c_val == '1' %}checked="checked"{% endif %} >
                
             </td>
             <td class="text-center">
-               <input type="radio" name="psecu_{{u_quest.p_m_idx}}" value="0" {% if u_quest.p_m_c_val == '0' %}checked="checked"{% endif %}>               
+               <input type="radio" class="psecu_{{u_quest.p_m_idx}}" name="psecu_{{u_quest.p_m_idx}}" value="0" {% if u_quest.p_m_c_val == '0' %}checked="checked"{% endif %}>               
             </td>
                     
         </tr>
@@ -145,11 +145,11 @@
                
             </td>  
             <td class="text-center">
-               <input type="radio" name="psecu_{{pe_quest.p_m_idx}}" value="1"{% if pe_quest.p_m_c_val == '1' %}checked="checked"{% endif %}>
+               <input type="radio"   class="psecu_{{pe_quest.p_m_idx}}" name="psecu_{{pe_quest.p_m_idx}}" value="1"{% if pe_quest.p_m_c_val == '1' %}checked="checked"{% endif %}>
                
             </td>
             <td class="text-center">
-               <input type="radio" name="psecu_{{pe_quest.p_m_idx}}" value="0" {% if pe_quest.p_m_c_val == '0' %}checked="checked"{% endif %}>               
+               <input type="radio" class="psecu_{{pe_quest.p_m_idx}}" name="psecu_{{pe_quest.p_m_idx}}" value="0" {% if pe_quest.p_m_c_val == '0' %}checked="checked"{% endif %}>               
             </td>
                     
         </tr>
@@ -164,11 +164,8 @@
         </tbody>
     </table>
     
-   
-   <button type="submit" class="btn btn-primary text-center">제출하기</button>
-   
-
-   <input type="hidden" name="p_m_b" value="{{p_wb_b}}">
+   <a href="javascript:void(0)" id="p_submit" class="btn btn-primary text-center">제출하기</a>
+   <input type="hidden" name="p_m_b" value="{{p_wb_b}}">  
    <input type="hidden" name="p_wb_idx" value="{{p_wb_idx}}">
    <input type="hidden" name="p_m_c_name" value="{{useridx}}">
 
@@ -177,6 +174,75 @@
 
 {% endblock %}
 {% block script %}
+<script type='text/javascript'>
+    const btn_submit = document.getElementById("p_submit");
+    btn_submit.addEventListener('click', function() {
+        var form = document.forms[0];
+        var p_m_c_wdate = document.getElementById("p_m_c_wdate").value;
+        if (p_m_c_wdate == null || p_m_c_wdate == '') {
+            alert("점검일자를 입력하세요.");
+            document.getElementById("p_m_c_wdate").focus();
+            return false;
+        }
+        var checked = false;
+        {%if ps_list_p %}
+            {% for p_quest in ps_list_p %} 
+                var r_psecu_{{p_quest.p_m_idx}} = document.getElementsByClassName("psecu_{{p_quest.p_m_idx}}");
+                for (var i = 0; i < r_psecu_{{p_quest.p_m_idx}}.length; i++) {
+                    if (r_psecu_{{p_quest.p_m_idx}}[i].checked) {
+                        checked = true;
+                        break;
+                    }
+                }
+                if (!checked) {
+                    alert("모든 항목에 대해 선택해 주세요.");                    
+                    return false;
+                }
+
+            {% endfor %}
+        {% endif %}            
+        var checked = false;
+        {%if ps_list_u %}
+            {% for u_quest in ps_list_u %} 
+                var r_psecu_u_{{u_quest.p_m_idx}} = document.getElementsByClassName("psecu_{{u_quest.p_m_idx}}");
+                for (var i = 0; i < r_psecu_u_{{u_quest.p_m_idx}}.length; i++) {
+                    if (r_psecu_u_{{u_quest.p_m_idx}}[i].checked) {
+                        checked = true;
+                        break;
+                    }
+                }
+                if (!checked) {
+                    alert("모든 항목에 대해 선택해 주세요.");
+                    return false;
+                }
+                    
+            {% endfor %}
+        {% endif %}
+
+           
+        var checked = false;
+        {%if ps_list_pe %}
+            {% for pe_quest in ps_list_pe %} 
+                var r_psecu_e_{{pe_quest.p_m_idx}} = document.getElementsByClassName("psecu_{{pe_quest.p_m_idx}}");
+                for (var i = 0; i < r_psecu_e_{{pe_quest.p_m_idx}}.length; i++) {
+                    if (r_psecu_e_{{pe_quest.p_m_idx}}[i].checked) {
+                        checked = true;
+                        break;
+                    }
+                }
+                if (!checked) {
+                    alert("모든 항목에 대해 선택해 주세요.");
+                    return false;
+                }
+            {% endfor %}
+        {% endif %}
+
+
+           
+        form.method = "post";
+        form.submit();
+    }); 
+</script>
 <!-- <script type='text/javascript'>
 const page_elements = document.getElementsByClassName("page-link");
 Array.from(page_elements).forEach(function(element) {
