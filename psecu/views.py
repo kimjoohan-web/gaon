@@ -362,7 +362,7 @@ def psecu_modify(request, p_wb_idx):
         SQL += ",B.p_m_c_val as p_m_c_val "        
         SQL += " from psecu_pc_secu_title_db A left join psecu_pc_secu_ck_db B on A.p_m_idx = B.p_m_idx_id "
         SQL += " where   A.P_m_YN = 'Y' and A.p_m_b = "+ str(p_wb_b )+ " and A.p_m_m = 1 and A.p_m_s = 0 "
-        SQL += " and B.p_m_c_id_id ="+ str(request.user.id)
+        SQL += " and B.p_wb_idx ="+ str(p_wb_idx)
         SQL += " order by A.p_m_asc desc "
 
         ps_list_p = pc_secu_title_db.objects.raw(SQL)
@@ -380,7 +380,7 @@ def psecu_modify(request, p_wb_idx):
         SQL += ",B.p_m_c_val as p_m_c_val "        
         SQL += " from psecu_pc_secu_title_db A left join psecu_pc_secu_ck_db B on A.p_m_idx = B.p_m_idx_id "
         SQL += " where   A.P_m_YN = 'Y' and A.p_m_b = "+ str(p_wb_b)+ " and A.p_m_m = 2 and A.p_m_s = 0 "
-        SQL += " and B.p_m_c_id_id ="+ str(request.user.id)
+        SQL += " and B.p_wb_idx ="+ str(p_wb_idx)
         SQL += " order by A.p_m_asc desc "
 
 
@@ -400,7 +400,7 @@ def psecu_modify(request, p_wb_idx):
         SQL += ",B.p_m_c_val as p_m_c_val "        
         SQL += " from psecu_pc_secu_title_db A left join psecu_pc_secu_ck_db B on A.p_m_idx = B.p_m_idx_id "
         SQL += " where   A.P_m_YN = 'Y' and A.p_m_b = "+ str(p_wb_b)+ " and A.p_m_m = 3 and A.p_m_s = 0 "
-        SQL += " and B.p_m_c_id_id ="+ str(request.user.id)
+        SQL += " and B.p_wb_idx ="+ str(p_wb_idx)
         SQL += " order by A.p_m_asc desc "
 
         ps_list_pe = pc_secu_title_db.objects.raw(SQL)        

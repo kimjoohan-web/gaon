@@ -159,7 +159,7 @@
     {% if p_wb_check != 'Y' and p_username == user.username %}
    <a href="{% url 'psecu:psecu_modify' p_wb_idx %}" class="btn btn-primary">수정하기</a>
     {% endif %}
-
+    <a href="{% url 'psecu:index'%}" class="btn btn-secondary text-center">목록으로</a>
 
     <input type="hidden" name="p_wb_idx" id = "p_wb_idx" value="{{p_wb_idx}}">
     <input type="hidden" name="p_m_b"  id = "p_m_b" value="1">
