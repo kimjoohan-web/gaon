@@ -57,8 +57,8 @@ INSTALLED_APPS = [
     'mt.apps.MtConfig',
     'gaonsample.apps.GaonsampleConfig',
     'manager.apps.ManagerConfig',
-    'psecu.apps.PsecuConfig',
-    
+    'psecu.apps.PsecuConfig',   
+    'gdraft.apps.GdraftConfig',
     # 'chat',
     # 'rest_framework',
     

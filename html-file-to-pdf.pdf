@@ -1,0 +1,126 @@
+
+
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--jquery JS-->
+    <script src="/static/jquery-3.7.1.js"></script>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+    <!-- pybo CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+
+    
+    
+    <title>hello 가온 원격평생교육원</title>
+</head>
+<body>
+  <!-- 네비게이션바 -->
+
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+
+<style>
+   
+    .draft-container { width: 800px; margin: 0 auto; border: 1px solid #ccc; padding: 30px; box-shadow: 2px 2px 10px #eee; }
+    
+    /* 제목 */
+    .title { text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px; }
+    
+    /* 결재란 */
+    .approval-table { float: right; border-collapse: collapse; width: 300px; margin-bottom: 20px; }
+    .approval-table th, .approval-table td { border: 1px solid #000; text-align: center; font-size: 12px; height: 25px; }
+    .approval-table th { background-color: #f2f2f2; width: 20%; }
+    .approval-table td.sign { height: 60px; width: 40%; } /* 서명란 높이 */
+
+    /* 기본정보 */
+    .info-table { border-collapse: collapse; width: 100%; margin-bottom: 20px; clear: both; }
+    .info-table th, .info-table td { border: 1px solid #000; padding: 10px; font-size: 14px; }
+    .info-table th { background-color: #f2f2f2; width: 15%; text-align: left; }
+    .info-table td { width: 35%; }
+
+    /* 내용 */
+    .content-table { border-collapse: collapse; width: 100%; }
+    .content-table th, .content-table td { border: 1px solid #000; padding: 10px; font-size: 14px; }
+    .content-table th { background-color: #f2f2f2; text-align: center; }
+    .content-table td.content-area { height: 300px; vertical-align: top; }
+
+    /* 인쇄 시 설정 */
+    @media print {
+        body { margin: 0; }
+        .draft-container { box-shadow: none; border: none; width: 100%; }
+        .no-print { display: none; }
+    }
+</style>
+</head>
+<body>
+
+<div class="draft-container">
+    <div class="title">기 안 서</div>
+
+    <!-- 결재란 -->
+    <table class="approval-table">
+        <tr>
+            <th rowspan="2">결<br>재</th>
+            <td>담당</td>
+            <td>원장</td>            
+        </tr>
+        <tr>
+            <td class="sign">
+                 
+                    <img src="/static/img/success.png" alt="결재완료" width="50" height="50"> 
+                
+            </td>
+            <td class="sign">
+                 
+                                
+                </td>            
+        </tr>
+    </table>
+
+    <!-- 기본 정보 -->
+    <table class="info-table">
+        <tr>
+            <th>문서번호</th>
+            <td>DR00001_2026</td>
+            <th>기안일자</th>
+            <td>2026년 1월 22일</td>
+        </tr>
+        <tr>            
+            <th>기안자</th>
+            <td colspan="3">이가현</td>
+        </tr>
+        
+        <tr>
+            <th>제 목</th>
+            <td colspan="3">테스트</td>
+        </tr>
+    </table>
+
+    <!-- 내용 -->
+    <table class="content-table">
+        <tr>
+            <th style="width: 15%;">내 용</th>
+            <td class="content-area">
+                기안합니다.
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+ <!-- Bootstrap JS -->
+<script src="/static/bootstrap.min.js"></script>
+
+<!-- 자바스크립트 Start -->
+
+
+
+<!-- 자바스크립트 End -->
+</body>
+</html>

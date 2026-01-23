@@ -23,19 +23,28 @@
                 </li>
                 <li>
                     <a class="nav-link" href="{% url 'pybo:list' category_id=2 %}">Free Board</a>                    
+                </li>                 
+                <li  class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">보고서</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'board:b_list' category_id=1 %}">장애보고서</a></li>
+                        <li><a class="dropdown-item" href="{% url 'board:b_list' category_id=2 %}">개선보고서</a></li>                       
+                        <li><a class="dropdown-item" href="{% url 'gdraft:index' %}">기안서</a></li>
+                    </ul>                    
                 </li>
-                <li>
-                    <a class="nav-link" href="{% url 'board:b_list' category_id=1 %}">장애보고서</a>                    
-                </li>
-                <li>
-                    <a class="nav-link" href="{% url 'board:b_list' category_id=2 %}">개선보고서</a>                    
-                </li>
+                <li  class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">점검</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'psecu:index'%}">직원PC보안</a></li>
+                                            
+                    </ul>                    
+                </li>               
                 <li>
                     <a class="nav-link" href="{% url 'board:approve_list'%}">결제하기</a>                    
                 </li>
-                <li>
+                <!-- <li>
                     <a class="nav-link" href="{% url 'mt:index' %}">수료현황</a>                    
-                </li>
+                </li> -->
                 {%else%}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
@@ -53,3 +62,4 @@
         </div>
     </div>
 </nav>
+

@@ -1,0 +1,48 @@
+{% extends 'base_popup.html' %}
+{% load static %}
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<link      rel="stylesheet"      href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"    />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">기안서</h5>
+    <form method="post"  action="{% url 'gdraft:gstatus_submit' %}">
+        {% csrf_token %}
+      <!-- 오류표시 Start -->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- 오류표시 End -->
+       
+        <div class="mb-3">
+            <label for="dr_status" class="form-label">결재상태</label>
+            <select  class="form-control" name="dr_status" id="dr_status">
+                <option value='결재대기' {% if '결재대기' == qboard.dr_status %}selected{% endif %}>결재대기</option>
+                <option value='결재완료' {% if '결재완료' == qboard.dr_status %}selected{% endif %}>결재완료</option>
+                <option value='반려' {% if '반려' == qboard.dr_status %}selected{% endif %}>반려</option>
+            </select>
+            
+        </div>
+        <hidden input type="hidden" name="dr_idx" id="dr_idx" value="{{ qboard.dr_idx }}">
+        <button type="submit" class="btn btn-primary">저장하기</button>
+    </form>
+</div>
+
+{% endblock %}
+{% block script %}
+
+{% endblock %}

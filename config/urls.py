@@ -41,6 +41,7 @@ urlpatterns = [
     path('mt/', include('mt.urls')),
     path('manager/', include('manager.urls')),
     path('psecu/', include('psecu.urls')),
+    path('gdraft/', include('gdraft.urls')),
     
     
     
