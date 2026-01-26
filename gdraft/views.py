@@ -20,9 +20,8 @@ from django.forms import modelform_factory
 from django_summernote.widgets import SummernoteWidget
 from board.models import Jik_gread
 
-from io import BytesIO
-from django.template.loader import get_template
-from xhtml2pdf import pisa
+
+
 
 # Create your views here.
 
@@ -318,31 +317,14 @@ def gdraft_print(request, dr_idx):
 
     # return HttpResponse(SQL)
     gdraft = Gdraft_db.objects.raw(SQL)  
-    context = {'gdraft': gdraft[0]}
-   
+    context = {'gdraft': gdraft[0]}   
     
-    
-    pdf = render_to_pdf('gdraft/gdraft_print.html', context)
-    download_filename = "gdraft_{}.pdf".format(gdraft[0].dr_no)
-    response = HttpResponse(pdf, content_type='application/pdf')    
-    response['Content-Disposition'] = f'attachment; filename="{download_filename}"' 
-    return response
+    return render(request, 'gdraft/gdraft_print.html', context)
     
     # return render(request, 'gdraft/gdraft_print.html', context)
     # return HttpResponse(pdf, content_type='application/pdf')
 
 
 def render_to_pdf(template_src, context_dict):
-    
-
-    template = get_template(template_src)
-    html  = template.render(context_dict)
-    result = BytesIO()
-    
-    
-    pdf = pisa.CreatePDF(BytesIO(html.encode("UTF-8")), result, encoding='UTF-8')
-    
-    if not pdf.err:
-        return result.getvalue()
-    return None
+    pass
 
