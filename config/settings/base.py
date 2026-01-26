@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'manager.apps.ManagerConfig',
     'psecu.apps.PsecuConfig',   
     'gdraft.apps.GdraftConfig',
+    'aisample.apps.AisampleConfig',
     # 'chat',
     # 'rest_framework',
     
