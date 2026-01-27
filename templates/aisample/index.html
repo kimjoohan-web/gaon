@@ -1,0 +1,275 @@
+{% extends 'base_popup.html' %}
+{% load pybo_filter %}
+{% load static %}
+{% block content %}
+        <link href="{% static 'css/gstyles.css' %}" rel="stylesheet" />
+        <script>
+            function pop_sample(url,name){
+                var popOption = "'scrollbars=no, resizable=no, left=100, width=1212, height=850'";
+                window.open(url,name,popOption);
+            }
+            function show_list(class_name){
+                var aia = document.getElementById("AIA");
+                var aib = document.getElementById("AIB");
+                
+                var lists = document.getElementsByClassName("lists");                
+                //lists.style.display = "none";
+                
+                if (class_name=='A' ){
+                    aia.style.display = "block";  
+                    aib.style.display = "none";                      
+               
+               } else if (class_name == 'B'){
+                    aib.style.display = "block";
+                    aia.style.display = "none";                      
+               }
+            }
+        </script>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="#page-top">gaon sample</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-primary bg-gradient text-white">
+            <div class="container px-4 text-center">
+                <h1 class="fw-bolder">AI 기초 영상 샘플보기</h1>
+                <a class="btn btn-lg btn-light" href="#" onclick="show_list('B')">오피스 업무자동화를 위한 AI 활용 문서·엑셀·보고서 작성</a>
+                <a class="btn btn-lg btn-light" href="#" onclick="show_list('A')">의료기관 부서별 행정업무의 생성형 AI 실무 활용</a>
+                
+            </div>
+        </header>
+        <!-- About section-->
+        <section id="about">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8" style="display:none;" id="AIA" class="lists">
+                        <h2>샘플 페이지</h2>
+                        <table class="table">
+                            <tr>                                
+                                <td colspan="2">강의명: 의료기관 부서별 행정업무의 생성형 AI 실무 활용</td>
+                            </tr>
+                            <tr> 
+                                <td>병동·외래 행정업무 흐름의 생성형 AI 관점 이해</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/001/01/index.html','sample_popup')">1차시 영상보기</a></td>
+                            </tr>
+                            <tr>
+                                <td>병동 간호기록·업무메모의 생성형 AI 정리</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/002/01/index.html','sample_popup')">2차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>외래 진료일정·내원 안내 문구의 생성형 AI 작성</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/003/01/index.html','sample_popup')">3차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>병동·외래 공지·회의 내용의 생성형 AI 요약과 정리</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/004/01/index.html','sample_popup')">4차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>병동·외래 행정업무의 개인별 생성형 AI 활용 패턴 정립</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/005/01/index.html','sample_popup')">5차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>원무·수납·제증명 업무 단계의 생성형 AI 관점 분석</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/006/01/index.html','sample_popup')">6차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>진료비·수납 안내 문구의 생성형 AI 작성</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/007/01/index.html','sample_popup')">7차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>제증명 발급 안내·Q&A의 생성형 AI 정리</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/008/01/index.html','sample_popup')">8차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>원무 창구·전화 응대 내용의 생성형 AI 메모와 요약</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/009/01/index.html','sample_popup')">9차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>원무·수납·제증명 업무의 개인 맞춤 AI 활용 방법 정립</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/010/01/index.html','sample_popup')">10차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>검사실·진료지원 행정업무의 생성형 AI 관점 정리</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/011/01/index.html','sample_popup')">11차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>검사 예약·준비 안내문의 생성형 AI 작성과 수정</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/012/01/index.html','sample_popup')">12차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>치료 일정·주의사항 안내문의 생성형 AI 활용 간소화</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D020513/01/index.html','sample_popup')">13차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>검사·진료지원 설명 자료의 생성형 AI 요약과 재구성</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/014/01/index.html','sample_popup')">14차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>검사실·진료지원 행정업무의 개인별 AI 활용 방식 정립</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/015/01/index.html','sample_popup')">15차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>의료기관 부서 회의·교육·공지 업무의 생성형 AI 관점 정리</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/016/01/index.html','sample_popup')">16차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>의료기관 부서 회의록·공지문의 생성형 AI 작성과 요약</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/017/01/index.html','sample_popup')">17차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>의료기관 부서 매뉴얼·업무 안내서의 생성형 AI 정리와 갱신</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/018/01/index.html','sample_popup')">18차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>실행 계획 작성 전 꼭 알아야 할 윤리·보안·저작권 알아보기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/019/01/index.html','sample_popup')">19차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>의료기관 부서 공통 AI 활용 수칙·가이드의 생성형 AI 정리</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/020/01/index.html','sample_popup')">20차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>의료기관 일상 행정·운영업무 AI 활용의 현장 정착 방안</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0205/021/01/index.html','sample_popup')">21차시 영상보기</a></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-8" id ='AIB' class="lists">
+                        <h2>샘플 페이지</h2>
+                        <table class="table">
+                            <tr>
+                                
+                                <td colspan="2">강의명 : AI기초_오피스 업무자동화를 위한 AI 활용 문서·엑셀·보고서 작성</td>
+                            </tr>
+                            <tr> 
+                                <td>보고서 힘들게 쓰지 말고, 생성형 AI랑 나눠서 해볼까?</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/001/01/index.html','sample_popup')">1차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>LLM, 도대체 무슨 원리로 문장을 지어내는 걸까?</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/002/01/index.html','sample_popup')">2차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>챗GPT만 있는 게 아니다? 문서용 생성형 AI 도구 찾아보기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/003/01/index.html','sample_popup')">3차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>내가 매일 쓰는 문서·메일 중 AI에게 넘기면 좋은 일 고르기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/004/01/index.html','sample_popup')">4차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>기밀·개인정보 괜찮을까? 문서에 AI 쓰기 전 꼭 체크할 것들</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/005/01/index.html','sample_popup')">5차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>엑셀 표, AI가 한눈에 읽기 좋게 바꿔보자</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/006/01/index.html','sample_popup')">6차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>이 많은 행·열 중에, AI에게 보여줄 데이터만 쏙쏙 고르기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/007/01/index.html','sample_popup')">7차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>합계·평균·개수, AI 분석 전에 사람이 먼저 정리하는 숫자들</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/008/01/index.html','sample_popup')">8차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>조건부 서식으로 AI랑 사람이 같이 보는 위험 신호 표시하기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/009/01/index.html','sample_popup')">9차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>우리 팀 엑셀 파일 1개, AI 분석용 버전으로 리모델링하기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/010/01/index.html','sample_popup')">10차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>회의 끝나자마자, 회의록 초안은 AI에게 먼저 맡겨보기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/011/01/index.html','sample_popup')">11차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>보고서 목차 고민 끝, 구조 설계는 AI에게 부탁해보기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/012/01/index.html','sample_popup')">12차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>어색한 문장 손봐줘! 보고서 문장을 AI와 같이 다듬기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/013/01/index.html','sample_popup')">13차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>발표자료, 슬라이드 흐름은 AI가 먼저 짜주게 해볼까?</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/014/01/index.html','sample_popup')">14차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>우리 팀 회의·보고 루틴에 AI 자동화 포인트 꽂아보기/td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/015/01/index.html','sample_popup')">15차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>AI만 잘 써도 일 확 줄어드는 그 한 가지 업무 찾기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/016/01/index.html','sample_popup')">16차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>이 업무, AI에게 뭘 주고 뭘 받을지 그림 그려보기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/017/01/index.html','sample_popup')">17차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>내 업무 전용 '문서·엑셀·보고서용' AI 프롬프트 틀 만들기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/018/01/index.html','sample_popup')">18차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>AI가 준 답을 기준으로, 템플릿을 어떻게 고칠지 기준 세우기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/019/01/index.html','sample_popup')">19차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>AI 오피스 템플릿 작성 전 꼭 알아야 할 윤리·보안·저작권 알아보기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/020/01/index.html','sample_popup')">20차시 영상보기</a></td>
+                            </tr>
+                            <tr> 
+                                <td>상사한테 칭찬받는 AI 오피스 템플릿·미니 개선안 완성하기</td>
+                                <td ><a href="#" onclick="pop_sample('//www.gaongn.net/contents/D0302/021/01/index.html','sample_popup')">21차시 영상보기</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+        <!-- Contact section-->
+        <section id="contact">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2>Contact us</h2>
+                        <p class="lead">
+                            가온원격평생교육원<br>
+                            대표이사: 김승완 사업자등록번호 : 192-81-03417 <br>통신판매업신고번호 : 제2025-서울강서-0465호<br>
+                            TEL : 1522-9818 <br>
+                            Email : gaon@gaongn.net<br>
+                            서울특별시 강서구 마곡중앙로171, 마곡나루역프라이빗타워Ⅱ 617-618호<br>
+                            
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+  
+{% endblock %}
+{% block script %}
+ <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <!-- <script src="js/scripts.js"></script> -->
+        <script src="{% static 'js/gscripts.js' %}"></script>
+        
+{% endblock %}
