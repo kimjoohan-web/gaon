@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 {% load pybo_filter %}
 {% block content %}
-
+<style>
+    modal-iframe {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 500vw;
+        height: 100vh;
+        display: block;
+    }
+</style>
 <div class="container my-3">
     <div class="row my-3">
         <div class="col text-center">
@@ -49,7 +58,7 @@
             <td class="text-center">{{ d_list.dr_date|date:'Y-m-d' }}</td>
             <td class="text-center">{{ d_list.dr_save_status  }}</td>
             <td class="text-center">{{ d_list.dr_status  }}</td>
-            <td class="text-center"><a href="{% url 'gdraft:gdraft_print' d_list.dr_idx %}">인쇄</a></td>
+            <td class="text-center"><a href="javascript:void(0)" class="print_view"  data-id="{{ d_list.dr_idx }}">인쇄</a></td>
         {% endfor %}
         {% else %}
         <tr>
@@ -110,10 +119,24 @@
             <a href="{% url 'gdraft:gdraft_submit'%}" class="btn btn-primary">기안작성</a>
 </div>
 </div>
-
+<!--모달 -->
+<div class="modal fade" id="myModal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">        
+      <iframe id="modal_iframe" width="100%" height="600px" frameborder="0"  ></iframe>
+    </div>
+    <div class="modal-footer">          
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+    </div>
+  </div>
+</div>
 {% endblock %}
 {% block script %}
 <script type='text/javascript'>
+
+
+
+
 const kw = new URLSearchParams(window.location.search).get('kw');
 if (kw) {
     document.getElementById('search_kw').value = kw;
@@ -138,6 +161,19 @@ btn_reset.addEventListener('click', function() {
     document.getElementById('kw').value = '';
     document.getElementById('page').value = 1;  // 초기화버튼을 클릭할 경우 1페이지부터 조회한다.
     document.getElementById('searchForm').submit();
+});
+
+const print_view_elements = document.getElementsByClassName("print_view");
+Array.from(print_view_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        const dr_idx = this.dataset.id;        
+        const modal_iframe = document.getElementById("modal_iframe");
+        modal_iframe.src = "{% url 'gdraft:gdraft_print' 0 %}".replace('/0/', '/' + dr_idx + '/');        
+        const myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+            keyboard: false
+        });
+        myModal.show();
+    });
 });
 </script>
 

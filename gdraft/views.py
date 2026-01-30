@@ -3,6 +3,8 @@ from unittest import result
 from urllib import request
 from django import forms
 from django.shortcuts import get_object_or_404, render
+from mistune import html
+from prompt_toolkit import HTML
 from .models import Gdraft_db,Gdraft_log,Gdraft_status
 from board.models import Jik_gread 
 from django.core.paginator import Paginator
@@ -19,8 +21,16 @@ from .forms import gdrform, selectform
 from django.forms import modelform_factory
 from django_summernote.widgets import SummernoteWidget
 from board.models import Jik_gread
+from io import BytesIO
+from django.http import FileResponse
+from django.template.loader import render_to_string 
 
 
+
+
+from django.conf import settings
+import os
+import io
 
 
 # Create your views here.
@@ -317,14 +327,22 @@ def gdraft_print(request, dr_idx):
 
     # return HttpResponse(SQL)
     gdraft = Gdraft_db.objects.raw(SQL)  
-    context = {'gdraft': gdraft[0]}   
+    t_dts_status=gdraft[0].drs_status_D
+    context = {'gdraft': gdraft[0], 't_dts_status': t_dts_status}   
+    return render(request, 'gdraft/gdraft_print.html', context) 
     
-    return render(request, 'gdraft/gdraft_print.html', context)
+
     
-    # return render(request, 'gdraft/gdraft_print.html', context)
-    # return HttpResponse(pdf, content_type='application/pdf')
+
+    
+    
 
 
-def render_to_pdf(template_src, context_dict):
-    pass
+    
+
+
+
+    
+    
+
 
