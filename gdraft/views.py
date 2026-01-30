@@ -3,7 +3,7 @@ from unittest import result
 from urllib import request
 from django import forms
 from django.shortcuts import get_object_or_404, render
-from mistune import html
+
 from prompt_toolkit import HTML
 from .models import Gdraft_db,Gdraft_log,Gdraft_status
 from board.models import Jik_gread 
