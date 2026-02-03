@@ -1,6 +1,6 @@
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from channels.db import database_sync_to_async
-from .models import ChatRoom, Message
+from .models import ChatRoom, Message ,ShopUser, VisitorUser
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):

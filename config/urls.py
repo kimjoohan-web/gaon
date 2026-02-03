@@ -35,7 +35,7 @@ urlpatterns = [
     path ('', views.index, name='index'), # 메인 페이지
     path('board/', include('board.urls')),
     # path('pybo/', include('pybo.urls')),
-    # path('chat/', include('chat.urls')),
+    path('chat/', include('chat.urls')),
     path('cale/', include('cale.urls')),
     path('gaonsample/', include('gaonsample.urls')),
     path('mt/', include('mt.urls')),
@@ -43,7 +43,7 @@ urlpatterns = [
     path('psecu/', include('psecu.urls')),
     path('gdraft/', include('gdraft.urls')),
     path('aisample/', include('aisample.urls')),
-    
+    path('gchat/', include('gchat.urls')),
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -16,8 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.loginAsUser = async (email) => {
+        //email = document.getElementById('current-user-email').value;
         currentUserEmail = email;
-        visitorUserEmail = email === "qw@naver.com" ? "er@naver.com" : "qw@naver.com";
+        // visitorUserEmail = email === "qw@naver.com" ? "er@naver.com" : "qw@naver.com";
+        visitorUserEmail = email === currentUserEmail ? "gaonlms@naver.com" : currentUserEmail;
         await openOrCreateRoom();
     };
 

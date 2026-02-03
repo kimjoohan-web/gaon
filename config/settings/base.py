@@ -41,8 +41,8 @@ ALLOWED_HOSTS = ['43.201.147.160']
 
 INSTALLED_APPS = [  
     'corsheaders',
-    #'channels',
-    #'daphne',
+    'channels',
+    'daphne',
     'django_summernote',
     'board.apps.BoardConfig',
     'main.apps.MainConfig',  
@@ -60,9 +60,9 @@ INSTALLED_APPS = [
     'psecu.apps.PsecuConfig',   
     'gdraft.apps.GdraftConfig',
     'aisample.apps.AisampleConfig',
-    # 'chat',
-    # 'rest_framework',
-    
+    'chat.apps.ChatConfig',
+    'rest_framework',
+    'gchat.apps.GchatConfig',
     
 ]
 

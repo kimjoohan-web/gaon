@@ -13,8 +13,8 @@
 <body>
 <div id="chat-container">
     <!-- 로그인 버튼 -->
-    <button onclick="loginAsUser('qw@naver.com')">User 1 (qw@naver.com)</button>
-    <button onclick="loginAsUser('er@naver.com')">User 2 (er@naver.com)</button>
+    <!-- <button onclick="loginAsUser('qw@naver.com')">User 1 (qw@naver.com)</button>
+    <button onclick="loginAsUser('er@naver.com')">User 2 (er@naver.com)</button> -->
     
     <!-- 채팅방 메시지 -->
     <div id="chat-messages"></div>
@@ -23,6 +23,7 @@
     <input type="text" id="message-input" placeholder="메시지를 입력하세요">
     <button id="send-btn">보내기</button>
 </div>
+<input type="hidden" id="current-user-email" value="{{ email }}">
 
 </body>
 </html>
@@ -30,6 +31,15 @@
 
  {% endblock %}
 {% block script %}
+
 <script src="{% static 'chat_scripts.js' %}"></script>
+<script >
+    document.addEventListener('DOMContentLoaded', function() {
+        // 현재 로그인한 사용자의 이메일을 템플릿 변수에서 가져와 설정
+        const currentUserEmail = "{{ email }}";
+        loginAsUser(currentUserEmail);
+    }); 
+
+</script>
 
 {% endblock %}

@@ -1,6 +1,8 @@
+import email
 from django.shortcuts import render
 
 # Create your views here.
+from django.contrib.auth.decorators import login_required
 from rest_framework import generics, serializers, status
 from rest_framework.response import Response
 from .models import ChatRoom, Message, ShopUser, VisitorUser
@@ -120,6 +122,7 @@ class MessageListView(generics.ListAPIView):
         return queryset
     
     
-    
-def chat_index(request):
-    return render(request, 'chat/index.html', {})
+@login_required(login_url='common:login') 
+def chat_index(request):    
+    context = {'email': request.user.email}
+    return render(request, 'chat/index.html', context)

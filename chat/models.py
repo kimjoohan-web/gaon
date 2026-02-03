@@ -19,3 +19,6 @@ class Message(models.Model):
     sender_email = models.EmailField()
     text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    
+
+    
