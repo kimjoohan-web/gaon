@@ -15,17 +15,11 @@
         const chatMessages = document.getElementById('chat-log');
         const chatSocket = new WebSocket(
             'ws://'
-            +'43.201.107.113'
+            + window.location.host
             + '/ws/gchat/'
             + roomName
             + '/'
         );
-        chatSocket.onopen = (event) => {
-            console.log('WebSocket connection opened:', event);
-            // Send your message here, within the onopen callback
-            chatSocket.send('Hello Server!');
-        };
-        
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             document.querySelector('#chat-log').value += (data.sender_email + ": " + data.message + '\n');
