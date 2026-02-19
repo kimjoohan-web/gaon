@@ -27,23 +27,23 @@
         chatSocket.onclose = function(e) {
             console.error('Chat socket closed unexpectedly');
         };
-        // const messages = []
-        // async function fetchMessages() {
-        //     const response = await fetch("/gchat/"+ roomName + "/messages/", {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify({ roomname: roomName })
-        //     });
+        const messages = []
+        async function fetchMessages() {
+            const response = await fetch("/gchat/"+ roomName + "/messages/", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ roomname: roomName })
+            });
             
-        //     messages = await response.json();
-        //     return messages
-        // }
+            messages = await response.json();
+            return messages
+        }
          
-        // message=fetchMessages()        
+        message=fetchMessages()        
 
-        // displayMessages(messages);
+        displayMessages(messages);
         const currentUserEmail = document.getElementById('current-user-email').value;
 
         document.querySelector('#chat-message-input').focus();
