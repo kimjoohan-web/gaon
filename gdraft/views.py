@@ -134,9 +134,10 @@ def gdraft_detail(request, dr_idx):
     # gdraft = get_object_or_404(Gdraft_db, pk=dr_idx)    
     # user_jik_gread = jik_check(request.user.id)
     SQL = "select id,j_gread from board_jik_gread where j_id_id = "+str(request.user.id)
+    # return HttpResponse(SQL)
     result=Jik_gread.objects.raw(SQL)   
     
-    user_jik_gread = result[0].j_gread if result else None
+    user_jik_gread = result[0].j_gread if result else 0
 
 
 
@@ -178,7 +179,7 @@ def gdraft_detail(request, dr_idx):
         dts_comment = ''
 
 
-
+    
 
     context = {'gdraft': gdraft[0], 'user_jik_gread': int(user_jik_gread), 'dts_status': dts_status, 'dts_comment': dts_comment, 't_dts_status': t_dts_status}
     return render(request, 'gdraft/gdraft_detail.html', context)

@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load pybo_filter %}
+{% block content %}
+<style>
+    modal-iframe {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 500vw;
+        height: 100vh;
+        display: block;
+    }
+</style>
+<div class="container my-3">
+    <div class="row my-3">
+        <div class="col text-center">
+            <h2>휴가계리스트</h2>
+        </div>
+        
+    </div>
+    <div class="row my-3">        
+        <div class="col-12">
+            <form id="searchForm" method="get" action="{% url 'vaca:index' %}">
+                <div class="input-group">
+                    <input type="text" id="search_kw" name="kw" class="form-control" placeholder="검색어를 입력하세요." value="{{ request.GET.kw }}">
+                    <button class="btn btn-primary" type="submit" id="btn_search">검색</button>&nbsp;
+                    <button class="btn btn-success" type="submit" id="btn_reset">초기화</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    
+    
+    <table class="table">
+        <thead>
+        <tr class="text-center table-dark">
+            <th>번호</th> 
+            <th>종류</th>           
+            <th>이름</th>           
+           
+            <th>작성일</th>            
+            <th>상세보기</th>
+
+            <th>인쇄</th>
+        </tr>
+        </thead>
+        <tbody>           
+        {%if leave_requests %}
+        {% for leave_request in leave_requests %}
+        <tr>
+            <td class="text-center">
+                <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                {{ leave_requests.paginator.count|sub:leave_requests.start_index|sub:forloop.counter0|add:1 }}
+            </td>
+            <!-- <td>{{ forloop.counter }}</td> -->
+            <td class="text-center"><a href="{% url 'vaca:leave_detail' leave_request.request_id %}">{{ leave_request.type_name  }}</a></td>
+            <td class="text-center">{{ leave_request.username  }}</td>                    
+            <td class="text-center">{{ leave_request.created_at|date:'Y-m-d' }}</td>                     
+            <td class="text-center"><a href="{% url 'vaca:leave_detail' leave_request.request_id %}">상세보기</a></td>
+            <td class="text-center"><a href="javascript:void(0)" class="print_view"  data-id="{{ leave_request.request_id }}">인쇄</a></td>                
+            
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="10 ">휴가계가 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if leave_requests.has_previous %}
+        <li class="page-item">
+            <!-- <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a> -->
+            <a class="page-link" data-page="{{ leave_requests.previous_page_number }}" href="javascript:void(0)">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <!-- <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a> -->
+             <a class="page-link" tabindex="-1" aria-disabled="true"     href="javascript:void(0)">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in leave_requests.paginator.page_range %}
+        {% if page_number >= leave_requests.number|add:-5 and page_number <= leave_requests.number|add:5 %}
+        {% if page_number == leave_requests.number %}
+        <li class="page-item active" aria-current="page">
+            <!-- <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a> -->
+             <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <!-- <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a> -->
+             <a class="page-link" data-page="{{ page_number }}"   href="javascript:void(0)">{{ page_number }}</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if leave_requests.has_next %}
+        <li class="page-item">
+            <!-- <a class="page-link" href="?page={{ leave_requests.next_page_number }}">다음</a> -->
+             <a class="page-link" data-page="{{ leave_requests.next_page_number }}"           href="javascript:void(0)">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <!-- <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a> -->
+             <a class="page-link" tabindex="-1" aria-disabled="true"   href="javascript:void(0)">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    
+    
+   
+   <input type="hidden" name="dr_id_id" value="{{useridx}}">
+<div class="col-6">
+            <a href="{% url 'vaca:leave_request'%}" class="btn btn-primary">휴가신청</a>
+</div>
+</div>
+<!--모달 -->
+<div class="modal fade" id="myModal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">        
+      <iframe id="modal_iframe" width="100%" height="600px" frameborder="0"  ></iframe>
+    </div>
+    <div class="modal-footer">          
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+<script type='text/javascript'>
+
+
+
+
+const kw = new URLSearchParams(window.location.search).get('kw');
+if (kw) {
+    document.getElementById('search_kw').value = kw;
+}   
+
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('page').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+    });
+});
+const btn_search = document.getElementById("btn_search");
+btn_search.addEventListener('click', function() {
+    document.getElementById('kw').value = document.getElementById('search_kw').value;
+    document.getElementById('page').value = 1;  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+    document.getElementById('searchForm').submit();
+});
+const btn_reset = document.getElementById("btn_reset");
+btn_reset.addEventListener('click', function() {
+    document.getElementById('search_kw').value = '';
+    document.getElementById('kw').value = '';
+    document.getElementById('page').value = 1;  // 초기화버튼을 클릭할 경우 1페이지부터 조회한다.
+    document.getElementById('searchForm').submit();
+});
+
+const print_view_elements = document.getElementsByClassName("print_view");
+Array.from(print_view_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        const dr_idx = this.dataset.id;        
+        const modal_iframe = document.getElementById("modal_iframe");
+        modal_iframe.src = "{% url 'gdraft:gdraft_print' 0 %}".replace('/0/', '/' + dr_idx + '/');        
+        const myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+            keyboard: false
+        });
+        myModal.show();
+    });
+});
+</script>
+
+
+{% endblock %}

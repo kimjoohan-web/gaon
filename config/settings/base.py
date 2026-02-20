@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'chat.apps.ChatConfig',
     'rest_framework',
     'gchat.apps.GchatConfig',
+    'vaca.apps.VacaConfig',
     
 ]
 

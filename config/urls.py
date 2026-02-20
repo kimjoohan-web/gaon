@@ -44,6 +44,7 @@ urlpatterns = [
     path('gdraft/', include('gdraft.urls')),
     path('aisample/', include('aisample.urls')),
     path('gchat/', include('gchat.urls')),
+    path('vaca/', include('vaca.urls')),
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
