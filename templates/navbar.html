@@ -23,13 +23,16 @@
                 </li>
                 <li>
                     <a class="nav-link" href="{% url 'pybo:list' category_id=2 %}">Free Board</a>                    
-                </li>                 
+                </li>
+                                 
                 <li  class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">보고서</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'vaca:index' %}">휴가계</a></li>
                         <li><a class="dropdown-item" href="{% url 'board:b_list' category_id=1 %}">장애보고서</a></li>
                         <li><a class="dropdown-item" href="{% url 'board:b_list' category_id=2 %}">개선보고서</a></li>                       
                         <li><a class="dropdown-item" href="{% url 'gdraft:index' %}">기안서</a></li>
+
                     </ul>                    
                 </li>
                 <li  class="nav-item dropdown">

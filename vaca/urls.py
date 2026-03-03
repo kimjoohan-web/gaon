@@ -8,6 +8,6 @@ urlpatterns =[
     path('', views.index,name='index'),        
     path('leave_request/',views.leave_request, name='leave_request'),  
     path('leave_detail/<int:request_id>/', views.leave_detail, name='leave_detail'),
-  
+    path('vaca_submit/', views.vaca_submit, name='vaca_submit'),
     
 ]

@@ -13,21 +13,21 @@
         </tr>
         <tr >
             <td class="text-center" style="border: 1px dotted #222324;">
-                {% if leave_request.drs_status_C == '결재완료' %}
+                {% if leave_request.approval_status == 'Approved' %}
                     <img src="{% static 'img/success.png' %}" alt="결재완료" width="50" height="50"> 
-                {% elif leave_request.drs_status_C == '반려'  %}
+                {% elif leave_request.approval_status == 'Rejected'  %}
                     <img src="{% static 'img/reject.png' %}" alt="반려" width="50" height="50"> 
-                {% elif leave_request.drs_status_C == '결재대기'  %}
+                {% elif leave_request.approval_status == 'Pending'  %}
                                    <br>
                 {% endif %}
                 
             </td>          
             <td class="text-center" style="border: 1px dotted #222324;">
-                {% if leave_request.drs_status_D == '결재완료' %}
+                {% if leave_request.t_approval_status == 'Approved' %}
                     <img src="{% static 'img/success.png' %}" alt="결재완료" width="50" height="50"> 
-                {% elif leave_request.drs_status_D == '반려'  %}
+                {% elif leave_request.t_approval_status == 'Rejected'  %}
                     <img src="{% static 'img/reject.png' %}" alt="반려" width="50" height="50"> 
-                {% elif leave_request.drs_status_D == '결재대기'  %}
+                {% elif leave_request.t_approval_status == 'Pending'  %}
                                 
                 {% endif %}
                 
@@ -54,21 +54,14 @@
     {% endif %}
     <!-- 질문 -->
      
-    <h2 class="border-bottom py-2">{{ leave_request.type_name }}</h2>     
+    <h2 class="border-bottom py-2">휴가계</h2>     
     <div class="mb-3">작성자 : {{ leave_request.username}}    </div>
     <div class="mb-3">작성일 : {{ leave_request.created_at|date:'Y-m-d' }}</div>
+    <div class="mb-3">종류 : {{ leave_request.type_name }}</div>
     <div class="mb-3">휴가일자 : {{ leave_request.start_date|date:'Y-m-d' }} ~ {{ leave_request.end_date|date:'Y-m-d' }}</div>
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" >{{ leave_request.reason|mark }}</div>
-            <!-- <div class="my-3">
-                <ul>
-            {% for qcomment in qcomment_list %}                
-                    <li>{{qcomment.content}} ({{qcomment.create_date}})</li>
-            {%endfor%}
-            </ul> 
-            </div>-->
-        
         </div>
     </div>
    
@@ -77,19 +70,19 @@
     <div class="my-3">
                 
         {% if request.user  == leave_request.user_id %} 
-        <a href="{% url 'gdraft:gdraft_modify' leave_request.request_id %}" class="btn btn-sm btn-outline-secondary">수정</a>
-        <a href="javascript:void(0)"  class="delete btn btn-sm btn-outline-secondary" data-uri="{% url 'gdraft:gdraft_delete' leave_request.request_id %}">삭제</a>
+        <a href="{% url 'vaca:vaca_modify' leave_request.request_id %}" class="btn btn-sm btn-outline-secondary">수정</a>
+        <a href="javascript:void(0)"  class="delete btn btn-sm btn-outline-secondary" data-uri="{% url 'vaca:vaca_delete' leave_request.request_id %}">삭제</a>
         {%endif%}
-        <a href="{% url 'gdraft:index' %}" class="btn btn-sm btn-outline-secondary">목록</a>
+        <a href="{% url 'vaca:index' %}" class="btn btn-sm btn-outline-secondary">목록</a>
     </div>
 </div>
- <input type="hidden" name="gdraft_status" id="gdraft_status" value="{{ leave_request.dr_save_status }}">
- <input type="hidden" name="t_dts_status" id="t_dts_status" value="{{ t_dts_status }}">
+ <input type="hidden" name="vaca_status" id="vaca_status" value="{{ leave_request.approval_status }}">
+ <input type="hidden" name="t_vaca_status" id="t_vaca_status" value="{{ leave_request.t_approval_status }}">
 <!--모달 -->
 <div class="modal fade" id="myModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">        
-      <form method="post" action="{% url 'gdraft:gstatus_submit'  %}">
+      <form method="post" action="{% url 'vaca:vaca_submit'  %}">
         {% csrf_token %}
         <div class="modal-body">
          {% csrf_token %}
@@ -109,19 +102,19 @@
         <!-- 오류표시 End -->
        
         <div class="mb-3">
-            <label for="dr_status" class="form-label">결재상태</label>
-            <select  class="form-control" name="dr_status" id="dr_status">
-                <option value='결재대기' {% if '결재대기' == dts_status %}selected{% endif %}>결재대기</option>
-                <option value='결재완료' {% if '결재완료' == dts_status %}selected{% endif %}>결재완료</option>
-                <option value='반려' {% if '반려' == dts_status %}selected{% endif %}>반려</option>
+            <label for="leave_status" class="form-label">결재상태</label>
+            <select  class="form-control" name="leave_status" id="leave_status">
+                <option value='Pending' {% if 'Pending' == leave_approvals.approval_status %}selected{% endif %}>결재대기</option>
+                <option value='Approved' {% if 'Approved' == leave_approvals.approval_status %}selected{% endif %}>결재완료</option>
+                <option value='Rejected' {% if 'Rejected' == leave_approvals.approval_status %}selected{% endif %}>반려</option>
             </select>
             
         </div>
         <div class="mb-3">
-            <label for="drs_comment" class="form-label">결재의견</label>
-            <textarea class="form-control" name="drs_comment" id="drs_comment" rows="3">{{ dts_comment }}</textarea>
+            <label for="comments" class="form-label">결재의견</label>
+            <textarea class="form-control" name="comments" id="comments" rows="3">{{ leave_approvals.comments  }}</textarea>
         </div>
-        <input type="hidden" name="dr_idx" id="dr_idx" value="">
+        <input type="hidden" name="request_id" id="request_id" value="">
         <input type="hidden" name="jik_gread" id="jik_gread" value="">
         </div>
         <div class="modal-footer">
@@ -138,23 +131,23 @@
 {% block script %}
 
 <script type='text/javascript'>
-const gdraft_modal = new bootstrap.Modal(document.getElementById('myModal'), {
+const vaca_modal = new bootstrap.Modal(document.getElementById('myModal'), {
   keyboard: false
 })
 
 const status_submit = function() {
-        dr_idx = document.getElementById("dr_idx").value;
+        request_id = document.getElementById("request_id").value;
         jik_gread = document.getElementById("jik_gread").value;
-        dr_status = document.getElementById("dr_status").value;
-        drs_comment = document.getElementById("drs_comment").value;
+        leave_status = document.getElementById("leave_status").value;
+        comments = document.getElementById("comments").value;
         $.ajax({
         type:'POST',
-        url:"{% url 'gdraft:gstatus_submit' %}",
+        url:"{% url 'vaca:vaca_submit' %}",
         data:{
-            'dr_idx': dr_idx,
+            'request_id': request_id,
             'jik_gread': jik_gread ,
-            'dr_status': dr_status,
-            'drs_comment': drs_comment
+            'leave_status': leave_status,
+            'comments': comments
             },
         headers: {"X-CSRFToken": "{{ csrf_token }}"},
         success:function(json){            
@@ -176,33 +169,38 @@ const status_submit = function() {
 
 const review_elements = document.getElementById("review_check");
     review_elements.addEventListener('click', function() {  
-        const dr_idx = this.getAttribute('data-id');
-        document.getElementById('dr_idx').value = dr_idx;
-        document.getElementById('jik_gread').value = 3; //담당자 또는 부장 
-        gdraft_status = document.getElementById("gdraft_status").value;
+        const vaca_status = document.getElementById("vaca_status").value;
+        if ("{{ user_jik_gread }}" != '3') {
+            alert(" 결재 권한이 없습니다.");
+            return;
+        }  
+
+
+         if( vaca_status == 'Approved') {
+            const request_id = this.getAttribute('data-id');
+            document.getElementById('request_id').value = request_id;
+            document.getElementById('jik_gread').value = 3; //담당자 또는 부장             
+         } else {
+            alert("담당자 결재가 완료된 후 원장 결재가 가능합니다.");
+            return;
+         }
         
 
        
 
-       if ("{{ user_jik_gread }}" != '3') {
-            alert(" 결재 권한이 없습니다.");
-            return;
-        }  
+       
         
-        if (gdraft_status != '작성완료') {
-            alert(" 작성완료된 기안서만 결재할 수 있습니다.");
-            return;
-        }
-        gdraft_modal.show();        
+       
+        vaca_modal.show();        
     });
 
 const status_elements = document.getElementById("ch_check");
     status_elements.addEventListener('click', function() {        
-        const dr_idx = this.getAttribute('data-id');
-        document.getElementById('dr_idx').value = dr_idx;
+        const request_id = this.getAttribute('data-id');
+        document.getElementById('request_id').value = request_id;
         document.getElementById('jik_gread').value = 2; //담당자 또는 부장
-        gdraft_status = document.getElementById("gdraft_status").value;
-        t_dts_status = document.getElementById("t_dts_status").value;
+        
+        t_vaca_status = document.getElementById("t_vaca_status").value;
 
        
         
@@ -211,15 +209,11 @@ const status_elements = document.getElementById("ch_check");
             alert(" 결재 권한이 없습니다.");
             return;
         }
-        if (gdraft_status != '작성완료') {
-            alert(" 작성완료된 기안서만 결재할 수 있습니다.");
-            return;
-        }
-        if( t_dts_status == '결재완료') {
+        if( t_vaca_status == 'Approved') {
             alert("원장이 결재완료 된 기안서는 다시 결재할 수 없습니다.");
             return;
         }
-        gdraft_modal.show();        
+        vaca_modal.show();        
     });
 
 const delete_elements = document.getElementsByClassName("delete");

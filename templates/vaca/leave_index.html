@@ -57,7 +57,7 @@
             <td class="text-center"><a href="{% url 'vaca:leave_detail' leave_request.request_id %}">{{ leave_request.type_name  }}</a></td>
             <td class="text-center">{{ leave_request.username  }}</td>                    
             <td class="text-center">{{ leave_request.created_at|date:'Y-m-d' }}</td>                     
-            <td class="text-center"><a href="{% url 'vaca:leave_detail' leave_request.request_id %}">상세보기</a></td>
+            <td class="text-center"><a href="{% url 'vaca:leave_detail' leave_request.request_id %}">{{leave_request.status}}</a></td>
             <td class="text-center"><a href="javascript:void(0)" class="print_view"  data-id="{{ leave_request.request_id }}">인쇄</a></td>                
             
         {% endfor %}
