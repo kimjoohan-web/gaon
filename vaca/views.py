@@ -142,12 +142,48 @@ def vaca_submit(request):
             cursor = connection.cursor()
             cursor.execute(sql_up, params)
             cursor.close()
+
+            # 결재 상태 업데이트 후 approver_order 결정
             approver_order = 2
+            # leave_balance 업데이트는 대표 결제일때만 수행
+            # 먼저 연차 아이디 낸 사람 부터 구한다
+            sql_id = "select request_id,user_id_id, leave_type_id,status  from vaca_leaverequest where request_id = %s"
+            result_id = LeaveRequest.objects.raw(sql_id, [request_id])
+            
+            for result in result_id:
+                ruser_id = result.user_id_id
+                rleave_type_id = result.leave_type_id
+                rleave_status = result.status
+
+
+                
+        
+                add_num = 0
+                used_days = 0 
+                if leave_status == 'Approved' and rleave_status != 'Approved':  # 결재 상태가 'Approved'로 변경되고 이전 상태가 'Approved'가 아닌 경우
+                    add_num = -1 
+                    used_days =1
+                    
+                elif leave_status != 'Approved' and rleave_status == 'Approved':  # 결재 상태가 'Approved'가 아닌 상태로 변경되고 이전 상태가 'Approved'인 경우   
+                    add_num = 1
+                    used_days = -1
+                else:
+                    add_num = 0  # 결재 상태가 변경되지 않은 경우
+                    used_days = 0
+                
+                sql_balance = "update vaca_leavebalance set remaining_days = remaining_days + %s " \
+                            ", used_days = used_days + %s " \
+                            " where user_id_id = %s "
+                
+                params_balance = (add_num, used_days,    ruser_id)
+                cursor_balance = connection.cursor()    
+                cursor_balance.execute(sql_balance, params_balance)
+                cursor_balance.close()
+
         elif jik_gread == 2: # 부장 결제일때만 결재 상태 업데이트
             approver_order = 1
         else:
             approver_order = 0
-
 
         sql_ex="select approval_id, approver_order from vaca_leaveapproval where leave_request_id = %s and approver_order = %s order by approved_at desc limit 1"
         result_ex = LeaveApproval.objects.raw(sql_ex, [request_id, approver_order])
@@ -166,5 +202,41 @@ def vaca_submit(request):
 
 
         return HttpResponse("결재가 완료되었습니다.")
+    else:
+        return HttpResponse("잘못된 요청입니다.")
+    
+
+
+
+
+def vaca_modify(request, request_id):
+    if request.method == 'POST':
+        request_id = request.POST['request_id']
+        leave_type = request.POST['leave_type']  # 예시로 leave_type을 가져오는 코드
+        start_date = request.POST['start_date']
+        end_date = request.POST['end_date']
+        reason = request.POST['reason']
+
+        sql_up="update vaca_leaverequest set leave_type_id = %s, start_date = %s, end_date = %s, reason = %s where request_id = %s"
+        params_up = (leave_type, start_date, end_date, reason, request_id)
+        cursor_up = connection.cursor()
+        cursor_up.execute(sql_up, params_up)
+        cursor_up.close()
+
+        return redirect('vaca:leave_detail', request_id=request_id)
+    else:
+        return HttpResponse("잘못된 요청입니다.")
+    
+
+
+    
+def vaca_delete(request, request_id):
+    if request.method == 'POST':
+        sql_del="delete from vaca_leaverequest where request_id = %s"
+        cursor_del = connection.cursor()
+        cursor_del.execute(sql_del, [request_id])
+        cursor_del.close()
+
+        return redirect('vaca:index')
     else:
         return HttpResponse("잘못된 요청입니다.")

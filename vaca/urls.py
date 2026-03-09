@@ -9,5 +9,6 @@ urlpatterns =[
     path('leave_request/',views.leave_request, name='leave_request'),  
     path('leave_detail/<int:request_id>/', views.leave_detail, name='leave_detail'),
     path('vaca_submit/', views.vaca_submit, name='vaca_submit'),
-    
+    path('vaca_modify/<int:request_id>/', views.vaca_modify, name='vaca_modify'),
+    path('vaca_delete/<int:request_id>/', views.vaca_delete, name='vaca_delete'),
 ]
