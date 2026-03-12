@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'gchat.apps.GchatConfig',
     'vaca.apps.VacaConfig',
+    'laundry.apps.LaundryConfig',
     
 ]
 
