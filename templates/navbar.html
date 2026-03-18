@@ -24,7 +24,9 @@
                 <li>
                     <a class="nav-link" href="{% url 'pybo:list' category_id=2 %}">Free Board</a>                    
                 </li>
-                                 
+                <li>
+                    <a class="nav-link" href="{% url 'f_board:f_list' %}">자료실 </a>                    
+                </li>              
                 <li  class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">보고서</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -57,7 +59,10 @@
                 </li>
                 
                 {%endif%}
-                <li  class="nav-item dropdown">
+                <li>
+                    <a class="nav-link" href="{% url 'gaonsample:index' %}">샘플 </a>                    
+                </li>
+                <!-- <li  class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">샘플</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{% url 'laundry:index' %}">의료기관 세탁물 종사자 교육</a></li> 
@@ -65,7 +70,7 @@
                         <li><a class="dropdown-item" href="{% url 'aisample:index' %}">Ai 기초과정</a></li>                                               
                         
                     </ul>                    
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

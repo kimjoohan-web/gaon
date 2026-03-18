@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'gchat.apps.GchatConfig',
     'vaca.apps.VacaConfig',
     'laundry.apps.LaundryConfig',
+    'f_board.apps.FBoardConfig',
     
 ]
 

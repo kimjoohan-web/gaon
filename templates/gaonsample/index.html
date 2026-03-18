@@ -13,10 +13,13 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
             <div class="container px-4">
                 <a class="navbar-brand" href="#page-top">gaon sample</a>
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/aisample/">Ai 기초과정</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/laundry/">의료기관 세탁물 종사자 교육</a></li>                        
                         <!-- <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li> -->
                     </ul>
@@ -26,10 +29,11 @@
         <!-- Header-->
         <header class="bg-primary bg-gradient text-white">
             <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Welcome to gaonsample</h1>
-                
-                <a class="btn btn-lg btn-light" href="https://www.gaongn.net/hrdedu/main/main.html" target="new">가온원격평생교육원</a>
-                <a class="btn btn-lg btn-light" href="#" onclick="pop_sample('//www.gaongn.net/contents/RGAON022/P/001/01/index.html','sample_popup')">감염관리 A to Z 미리보기</a>
+                <h1 class="fw-bolder">Welcome to gaonsample</h1>                
+                <!-- <a class="btn btn-lg btn-light" href="https://www.gaongn.net/hrdedu/main/main.html" target="new">가온원격평생교육원</a> -->                 
+                <a class="btn btn-lg btn-light" href="#" onclick="pop_sample('//www.gaongn.net/contents/RGAON022/P/001/01/index.html','sample_popup')">감염관리 A to Z 미리보기</a>         
+                <a class="btn btn-lg btn-light" href="/aisample/" target="new">AI 기초과정</a>
+                <a class="btn btn-lg btn-light" href="/laundry/" target="new">의료기관 세탁물 종사자 교육</a>
             </div>
         </header>
         <!-- About section-->
@@ -62,22 +66,7 @@
         </section>
         <!-- Contact section-->
         <section id="contact">
-            <div class="container px-4">
-                <div class="row gx-4 justify-content-center">
-                    <div class="col-lg-8">
-                        <h2>Contact us</h2>
-                        <p class="lead">
-                            가온원격평생교육원<br>
-                            대표이사: 김승완 사업자등록번호 : 192-81-03417 <br>통신판매업신고번호 : 제2025-서울강서-0465호<br>
-                            TEL : 1522-9818 <br>
-                            Email : gaon@gaongn.net<br>
-                            서울특별시 강서구 마곡중앙로171, 마곡나루역프라이빗타워Ⅱ 617-618호<br>
-                            
-
-                        </p>
-                    </div>
-                </div>
-            </div>
+            {% include "about_sample.html" %}
         </section>
         
         

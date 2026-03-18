@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">자료등록</h5>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <!-- 오류표시 Start -->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- 오류표시 End -->
+        <div class="mb-3">
+            <label for="f_title" class="form-label">제목</label>
+            <input type="text" class="form-control" name="f_title" id="f_title"
+                   value="{{ form.f_title.value|default_if_none:'' }}">
+        </div>
+        <div class="mb-3">
+            <label for="f_contents" class="form-label">내용</label>
+            <textarea class="form-control" name="f_contents"
+                      id="f_contents" rows="10">{{ form.f_contents.value|default_if_none:'' }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="f_file_one" class="form-label">첨부파일</label>
+           {%if f_board.f_file_one %}
+            기존 파일 <a href="/board/download?path={{ f_board.f_file_one}}">{{f_board.f_file_one}}</a> 
+              <input type="checkbox" name="f_file_one_clear" id="f_file_one_clear" value="on">
+            <label for="f_file_one_clear">파일삭제</label>
+           {%endif%}
+            <input type="file" class="form-control" name="f_file_one" id="f_file_one">
+        </div>
+        <div class="mb-3">
+            <label for="f_file_two" class="form-label">첨부파일</label>
+            {%if f_board.f_file_two %}
+            기존 파일 <a href="/board/download?path={{ f_board.f_file_two}}">{{f_board.f_file_two}}</a> 
+            <input type="checkbox" name="f_file_two_clear" id="f_file_two_clear" value="on">
+            <label for="f_file_two_clear">파일삭제</label>
+            {%endif%}
+            <input type="file" class="form-control" name="f_file_two" id="f_file_two">
+        </div>
+        <div class="mb-3">
+            <label for="f_file_three" class="form-label">첨부파일</label>
+            {%if f_board.f_file_three %}
+            기존 파일 <a href="/board/download?path={{ f_board.f_file_three}}">{{f_board.f_file_three}}</a> 
+            <input type="checkbox" name="f_file_three_clear" id="f_file_three_clear" value="on">
+            <label for="f_file_three_clear">파일삭제</label>
+            {%endif%}
+            <input type="file" class="form-control" name="f_file_three" id="f_file_three">
+        </div>
+        
+        {% if f_board.f_id %}
+        <button type="submit" class="btn btn-primary">수정하기</button>
+        {%else%}
+        <button type="submit" class="btn btn-primary">저장하기</button>
+        {%endif%}
+        <a href="{% url 'f_board:f_list' %}" class="btn btn-secondary">목록보기</a>
+    </form>
+</div>
+{% endblock %}
+{% block script %}
+
+
+{% endblock %}

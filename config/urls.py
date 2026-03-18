@@ -46,6 +46,7 @@ urlpatterns = [
     path('gchat/', include('gchat.urls')),
     path('vaca/', include('vaca.urls')),
     path('laundry/', include('laundry.urls')),
+    path('f_board/', include('f_board.urls')),
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
