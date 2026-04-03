@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'vaca.apps.VacaConfig',
     'laundry.apps.LaundryConfig',
     'f_board.apps.FBoardConfig',
+    'waitboard.apps.WaitboardConfig',
     
 ]
 
@@ -177,7 +178,8 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [("43.201.107.113",6379)],
+            # "hosts": [("43.201.107.113",6379)],
+            "hosts": [("localhost",6379)],
         },
     },
 }

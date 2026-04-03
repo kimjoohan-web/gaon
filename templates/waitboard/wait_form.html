@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">대기자 등록</h5>
+    <form method="post" >
+        {% csrf_token %}
+      <!-- 오류표시 Start -->
+       {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- 오류표시 End -->
+        <div class="mb-3">
+            <label for="w_name" class="form-label">이름</label>
+            <input type="text" class="form-control" name="w_name" id="w_name" value="{{ form.w_name.value|default_if_none:'' }}">
+        </div>
+        <div class="mb-3">
+            <label for="w_hp" class="form-label">전화번호</label>
+            <input type="text" class="form-control" name="w_hp" id="w_hp"  value="{{ form.w_hp.value|default_if_none:'' }}">
+        </div>
+        
+        
+        
+        {% if waitboard.w_id %}
+        <button type="submit" class="btn btn-primary">수정하기</button>
+        {%else%}
+        <button type="submit" class="btn btn-primary">저장하기</button>
+        {%endif%}
+        <a href="{% url 'waitboard:wait' %}" class="btn btn-secondary">목록보기</a>
+    </form>
+</div>
+{% endblock %}
+{% block script %}
+
+
+{% endblock %}
