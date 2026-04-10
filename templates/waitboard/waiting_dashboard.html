@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실시간 대기자 리스트</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #1d4ed8;
+        }
+
+        .live-badge {
+            background: #ef4444;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .top-info {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .info-box {
+            flex: 1;
+            min-width: 180px;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .info-box .label {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .info-box .value {
+            font-size: 24px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .form-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .form-area input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-area input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+        .form-area button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .form-area button:hover {
+            background: #1d4ed8;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        thead {
+            background: #eff6ff;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        th {
+            color: #1e3a8a;
+            font-weight: 800;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .num-badge {
+            display: inline-flex;
+            width: 34px;
+            height: 34px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-weight: 800;
+        }
+
+        .delete-btn {
+            border: none;
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .delete-btn:hover {
+            background: #fecaca;
+        }
+
+        .empty-row {
+            text-align: center;
+            color: #64748b;
+            padding: 28px;
+        }
+
+        .status {
+            margin-top: 14px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .status.connected {
+            color: #16a34a;
+        }
+
+        .status.disconnected {
+            color: #dc2626;
+        }
+
+        @media (max-width: 768px) {
+            .form-area {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>실시간 대기자 리스트</h1>        
+    </div>
+
+    <div class="top-info">
+        <div class="info-box">
+            <div class="label">현재 대기 인원</div>
+            <div class="value" id="waitingCount">0명</div>
+        </div>
+        <!-- <div class="info-box">
+            <div class="label">연결 상태</div>
+            <div class="value" id="socketState" style="font-size:18px;">연결 중...</div>
+        </div> -->
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>관리</th>
+                </tr>
+            </thead>
+            <tbody id="waitingTableBody">
+                <tr>
+                    <td colspan="4" class="empty-row">대기자 데이터를 불러오는 중입니다...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="statusText" class="status">서버에 연결 중입니다.</div>
+</div>
+
+<script>
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws/wait_list/`);
+
+    const waitingTableBody = document.getElementById("waitingTableBody");
+    const waitingCount = document.getElementById("waitingCount");
+    // const socketState = document.getElementById("socketState");
+    const statusText = document.getElementById("statusText");
+
+    socket.onopen = function () {
+        // socketState.textContent = "연결됨";
+        statusText.textContent = "실시간 동기화가 활성화되었습니다.";
+        statusText.className = "status connected";
+    };
+
+    socket.onclose = function () {
+        // socketState.textContent = "연결 끊김";
+        statusText.textContent = "서버 연결이 끊어졌습니다.";
+        statusText.className = "status disconnected";
+    };
+
+    socket.onerror = function () {
+        // socketState.textContent = "오류";
+        statusText.textContent = "웹소켓 연결 중 오류가 발생했습니다.";
+        statusText.className = "status disconnected";
+    };
+
+    socket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+
+        if (data.type === "wait_list") {
+            renderTable(data.waiters);
+        }
+    };
+
+    function renderTable(waiters) {
+        waitingCount.textContent = `${waiters.length}명`;
+
+        if (!waiters.length) {
+            waitingTableBody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="empty-row">현재 대기자가 없습니다.</td>
+                </tr>
+            `;
+            return;
+        }
+
+        waitingTableBody.innerHTML = waiters.map((waiter, index) => `
+            <tr>
+                <td><span class="num-badge">${index + 1}</span></td>
+                <td>${escapeHtml(waiter.name)}</td>
+                <td>${escapeHtml(waiter.phone)}</td>
+                <td>
+                    <button class="delete-btn" onclick="deleteWaiter(${waiter.w_id})">삭제</button>
+                </td>
+            </tr>
+        `).join("");
+    }
+
+    function addWaiter() {
+        const nameInput = document.getElementById("nameInput");
+        const phoneInput = document.getElementById("phoneInput");
+
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+
+        if (!name) {
+            alert("이름을 입력해주세요.");
+            nameInput.focus();
+            return;
+        }
+
+        if (!phone) {
+            alert("전화번호를 입력해주세요.");
+            phoneInput.focus();
+            return;
+        }
+
+        socket.send(JSON.stringify({
+            action: "add",
+            name: name,
+            phone: phone
+        }));
+
+        nameInput.value = "";
+        phoneInput.value = "";
+        nameInput.focus();
+    }
+
+    function deleteWaiter(id) {
+        if (!confirm("해당 대기자를 삭제하시겠습니까?")) return;
+
+        socket.send(JSON.stringify({
+            action: "delete",
+            w_id: id
+        }));
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.innerText = text;
+        return div.innerHTML;
+    }
+
+    document.getElementById("phoneInput").addEventListener("input", function (e) {
+        let value = e.target.value.replace(/[^0-9]/g, "");
+
+        if (value.length < 4) {
+            e.target.value = value;
+        } else if (value.length < 8) {
+            e.target.value = `${value.slice(0, 3)}-${value.slice(3)}`;
+        } else {
+            e.target.value = `${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7, 11)}`;
+        }
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            const active = document.activeElement;
+            if (active.id === "nameInput" || active.id === "phoneInput") {
+                addWaiter();
+            }
+        }
+    });
+</script>
+</body>
+</html>
