@@ -244,13 +244,8 @@
 </div>
 
 <script>
-    // const protocol = window.location.protocol === "https:" ? "wss" : "ws";
-    // const socket = new WebSocket(`${protocol}://${window.location.host}/ws/wait_list/`);
-    const socket = new WebSocket(
-            'ws://'
-            + '43.201.147.160'
-            + '/ws/wait_list/'
-        );
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws/wait_list/`);
 
     const waitingTableBody = document.getElementById("waitingTableBody");
     const waitingCount = document.getElementById("waitingCount");
