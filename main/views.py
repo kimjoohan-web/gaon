@@ -19,5 +19,6 @@ def index(request,category_id=1):
     # print(question_list)
     # return HttpResponse(question_list_two)
     context = {"question_list_one":question_list_one,"question_list_two":question_list_two,"question_list_noti":question_list_noti}    
-    return render(request,'main/main.html',context)
+    # return render(request,'main/main.html',context)
+    return render(request,'main/gaon.html',context)
 
