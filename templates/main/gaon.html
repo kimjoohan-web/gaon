@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>가온강남 원격 평생 교육원 | 2026 온라인 교육</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1a2e4a;
+      --blue: #1e5fa8;
+      --sky: #3b9bd8;
+      --accent: #f0a500;
+      --light: #f4f7fc;
+      --white: #ffffff;
+      --mid: #6b7a8d;
+      --text: #1e2d3d;
+      --line: rgba(30,47,74,0.1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26,46,74,0.97); backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+    }
+    .logo-wrap { display: flex; flex-direction: column; }
+    .logo-main { font-family: 'Noto Serif KR', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
+    .logo-sub { font-size: 0.6rem; color: rgba(255,255,255,0.5); letter-spacing: 0.15em; margin-top: 2px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-tel { background: var(--accent); color: var(--navy); padding: 0.5rem 1.2rem; font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+    .nav-tel:hover { opacity: 0.85; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; background: var(--navy);
+      display: flex; align-items: center;
+      padding: 7rem 5% 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-circle {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,155,216,0.15) 0%, transparent 70%);
+    }
+    .hero-bg-circle.c1 { width: 700px; height: 700px; top: -200px; right: -100px; }
+    .hero-bg-circle.c2 { width: 400px; height: 400px; bottom: -100px; left: 30%; }
+    .hero-inner { position: relative; z-index: 1; max-width: 1200px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-badge { display: inline-block; background: rgba(240,165,0,0.15); border: 1px solid rgba(240,165,0,0.4); color: var(--accent); font-size: 0.7rem; letter-spacing: 0.15em; padding: 0.35rem 0.9rem; margin-bottom: 1.5rem; }
+    .hero-title { font-family: 'Noto Serif KR', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; color: var(--white); line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 1.2rem; }
+    .hero-title em { color: var(--accent); font-style: normal; }
+    .hero-desc { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.8; font-weight: 300; margin-bottom: 2.5rem; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-main { background: var(--accent); color: var(--navy); padding: 0.9rem 2rem; font-size: 0.9rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: transform 0.2s, opacity 0.2s; }
+    .btn-main:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); padding: 0.9rem 2rem; font-size: 0.9rem; cursor: pointer; transition: border-color 0.2s; }
+    .btn-outline:hover { border-color: var(--white); }
+    .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); }
+    .hero-stat { background: rgba(255,255,255,0.04); padding: 2rem 1.5rem; text-align: center; }
+    .hero-stat-num { font-family: 'Noto Serif KR', serif; font-size: 2.2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem; letter-spacing: 0.04em; }
+
+    /* SECTION COMMON */
+    section { padding: 6rem 5%; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-badge { display: inline-block; background: rgba(30,95,168,0.08); color: var(--blue); font-size: 0.7rem; letter-spacing: 0.18em; padding: 0.3rem 0.8rem; margin-bottom: 1rem; font-weight: 500; }
+    .section-title { font-family: 'Noto Serif KR', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; margin-bottom: 0.8rem; }
+    .section-desc { color: var(--mid); font-size: 0.9rem; line-height: 1.8; font-weight: 300; max-width: 500px; }
+
+    /* ABOUT */
+    #about { background: var(--light); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+    .about-stat { background: var(--white); padding: 1.5rem; border-left: 3px solid var(--blue); }
+    .about-stat-num { font-family: 'Noto Serif KR', serif; font-size: 1.8rem; font-weight: 700; color: var(--navy); }
+    .about-stat-label { font-size: 0.78rem; color: var(--mid); margin-top: 0.3rem; }
+    .about-badges { display: flex; flex-direction: column; gap: 1.2rem; }
+    .about-badge-item { background: var(--white); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1.2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+    .about-badge-icon { width: 48px; height: 48px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .about-badge-title { font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+    .about-badge-sub { font-size: 0.78rem; color: var(--mid); margin-top: 0.2rem; }
+
+    /* SERVICES */
+    #services { background: var(--white); }
+    .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .service-card { border: 1px solid var(--line); padding: 2.5rem; position: relative; transition: box-shadow 0.3s, transform 0.3s; }
+    .service-card:hover { box-shadow: 0 8px 30px rgba(30,95,168,0.1); transform: translateY(-3px); }
+    .service-num { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--sky); font-weight: 500; margin-bottom: 1rem; }
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .service-name { font-family: 'Noto Serif KR', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.8rem; }
+    .service-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.7; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .service-tag { background: var(--light); color: var(--blue); font-size: 0.7rem; padding: 0.25rem 0.6rem; }
+
+    /* MANDATORY EDU */
+    #mandatory { background: var(--navy); }
+    #mandatory .section-title { color: var(--white); }
+    #mandatory .section-desc { color: rgba(255,255,255,0.5); }
+    .mandatory-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 3rem; }
+    .mandatory-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 1.8rem 1.2rem; text-align: center; transition: background 0.3s; }
+    .mandatory-card:hover { background: rgba(59,155,216,0.15); }
+    .mandatory-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .mandatory-name { font-size: 0.85rem; font-weight: 700; color: var(--white); margin-bottom: 0.8rem; }
+    .mandatory-info { font-size: 0.72rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+    .mandatory-info span { display: block; }
+    .mandatory-info strong { color: var(--accent); }
+    .mandatory-cta { margin-top: 2.5rem; text-align: center; }
+    .mandatory-cta p { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+
+    /* INDUSTRY */
+    #industry { background: var(--light); }
+    .industry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .industry-card { background: var(--white); padding: 2rem; }
+    .industry-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .industry-name { font-weight: 700; font-size: 0.95rem; color: var(--navy); margin-bottom: 0.6rem; border-bottom: 2px solid var(--blue); padding-bottom: 0.6rem; }
+    .industry-tags { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.8rem; }
+    .industry-tag { font-size: 0.78rem; color: var(--mid); padding-left: 0.8rem; position: relative; }
+    .industry-tag::before { content: '·'; position: absolute; left: 0; color: var(--sky); }
+
+    /* CLIENTS */
+    #clients { background: var(--white); }
+    .clients-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; }
+    .clients-badge-big { background: var(--navy); color: var(--white); font-family: 'Noto Serif KR', serif; font-size: 1.8rem; font-weight: 700; padding: 1rem 2rem; white-space: nowrap; }
+    .clients-sections { display: flex; flex-direction: column; gap: 2.5rem; }
+    .clients-section-title { font-size: 0.75rem; letter-spacing: 0.15em; color: var(--mid); margin-bottom: 1rem; border-left: 3px solid var(--blue); padding-left: 0.8rem; }
+    .clients-list { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .client-tag { background: var(--light); color: var(--navy); font-size: 0.8rem; padding: 0.5rem 1rem; border: 1px solid var(--line); }
+
+    /* ADVANTAGES */
+    #advantages { background: var(--navy); }
+    #advantages .section-title { color: var(--white); }
+    .advantages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+    .advantage-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 2.5rem 2rem; }
+    .advantage-icon { font-size: 2.2rem; margin-bottom: 1.2rem; }
+    .advantage-name { font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: 0.8rem; }
+    .advantage-desc { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+    /* PROCESS */
+    #process { background: var(--light); }
+    .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 3rem; position: relative; }
+    .process-steps::before { content: ''; position: absolute; top: 2.5rem; left: 10%; right: 10%; height: 2px; background: var(--blue); z-index: 0; }
+    .process-step { text-align: center; position: relative; z-index: 1; padding: 0 0.5rem; }
+    .process-num { width: 50px; height: 50px; background: var(--navy); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; margin: 0 auto 1.2rem; border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--blue); }
+    .process-name { font-weight: 700; font-size: 0.85rem; color: var(--navy); margin-bottom: 0.4rem; }
+    .process-desc { font-size: 0.72rem; color: var(--mid); line-height: 1.5; }
+
+    /* HRD */
+    #hrd { background: var(--white); }
+    .hrd-top { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+    .hrd-nums { display: flex; flex-direction: column; gap: 1.5rem; }
+    .hrd-num-card { background: var(--navy); color: var(--white); padding: 2rem; text-align: center; }
+    .hrd-num-big { font-family: 'Noto Serif KR', serif; font-size: 2.5rem; font-weight: 700; color: var(--accent); }
+    .hrd-num-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem; }
+    .hrd-cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .hrd-cat { background: var(--light); padding: 1.5rem; }
+    .hrd-cat-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+    .hrd-cat-name { font-weight: 700; font-size: 0.85rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .hrd-cat-tags { font-size: 0.75rem; color: var(--mid); line-height: 1.6; }
+
+    /* VOUCHER */
+    #voucher { background: var(--light); }
+    .voucher-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+    .voucher-info-title { font-weight: 700; font-size: 0.85rem; color: var(--navy); margin-bottom: 0.6rem; }
+    .voucher-info-body { font-size: 0.82rem; color: var(--mid); line-height: 1.7; }
+    .voucher-info-body li { margin-left: 1rem; margin-top: 0.3rem; }
+    .voucher-steps { display: flex; flex-direction: column; gap: 1rem; }
+    .voucher-step { display: flex; gap: 1.2rem; align-items: flex-start; }
+    .vstep-num { width: 36px; height: 36px; background: var(--blue); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; }
+    .vstep-name { font-weight: 700; font-size: 0.85rem; color: var(--navy); }
+    .vstep-desc { font-size: 0.78rem; color: var(--mid); margin-top: 0.2rem; line-height: 1.5; }
+    .voucher-highlight { background: rgba(240,165,0,0.1); border-left: 4px solid var(--accent); padding: 1.2rem 1.5rem; margin-top: 1.5rem; font-size: 0.85rem; color: var(--navy); font-weight: 500; }
+
+    /* CONTACT */
+    #contact { background: var(--navy); padding: 6rem 5%; }
+    .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .contact-left .section-title { color: var(--white); }
+    .contact-left p { color: rgba(255,255,255,0.55); font-size: 0.9rem; line-height: 1.8; margin-top: 1rem; }
+    .contact-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+    .contact-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 1.5rem; }
+    .contact-card-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+    .contact-card-title { font-size: 0.7rem; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.4rem; }
+    .contact-card-value { font-size: 0.9rem; color: var(--white); font-weight: 700; }
+    .contact-card-sub { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+    .tel-big { font-family: 'Noto Serif KR', serif; font-size: 3.5rem; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+    .tel-label { color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 0.5rem; }
+    .tel-btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: var(--navy); padding: 1rem 2.5rem; font-size: 0.9rem; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+    .tel-btn:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer { background: #0f1d2e; padding: 2rem 5%; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-family: 'Noto Serif KR', serif; color: var(--white); font-size: 0.9rem; }
+    .footer-info { font-size: 0.72rem; color: rgba(255,255,255,0.3); line-height: 1.7; text-align: right; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 4%; }
+      .nav-links { display: none; }
+      .hero-inner, .about-grid, .voucher-grid, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .mandatory-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .industry-grid { grid-template-columns: 1fr 1fr; }
+      .process-steps { grid-template-columns: 1fr; gap: 1.5rem; }
+      .process-steps::before { display: none; }
+      .hrd-top { grid-template-columns: 1fr; }
+      .hrd-cats { grid-template-columns: 1fr 1fr; }
+      .advantages-grid { grid-template-columns: 1fr; }
+      .clients-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      footer .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer-info { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-wrap">
+    <div class="logo-main">가온강남 원격 평생 교육원</div>
+    <div class="logo-sub">GAONGN E-LEARNING ACADEMY</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">기관소개</a></li>
+    <li><a href="#services">교육과정</a></li>
+    <li><a href="#clients">고객사</a></li>
+    <li><a href="#advantages">기관장점</a></li>
+    <li><a href="#contact">상담문의</a></li>
+  </ul>
+  <a href="tel:15229818" class="nav-tel">📞 1522-9818</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">2026 온라인 교육 제안서</div>
+      <h1 class="hero-title">
+        신뢰할 수 있는<br/>
+        <em>온라인 교육 파트너</em>
+      </h1>
+      <p class="hero-desc">
+        고용노동부·산업인력공단·장애인고용공단<br/>
+        3개 주무부처 허가 기관으로<br/>
+        법정의무교육부터 직무 HRD까지 원스톱 제공합니다.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-main">무료 상담 신청</a>
+        <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">교육과정 보기</button>
+      </div>
+    </div>
+    <div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">10,000+</div>
+          <div class="hero-stat-label">월간 수강생</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">8,000+</div>
+          <div class="hero-stat-label">직무 교육과정</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">10+</div>
+          <div class="hero-stat-label">전국 지사</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">2,000+</div>
+          <div class="hero-stat-label">분기별 파트너</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">60,000+</div>
+          <div class="hero-stat-label">교육 수강 중</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">3개</div>
+          <div class="hero-stat-label">주무부처 허가</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-badge">ABOUT US</div>
+        <h2 class="section-title">수많은 고객사와 함께<br/>증명해낸 교육 역량</h2>
+        <p class="section-desc">Since 2025년 설립 이후, 전국 10개 이상 지사 네트워크를 통해 중소기업부터 대형 의료기관까지 다양한 조직에 맞춤형 온라인 교육을 제공합니다.</p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="about-stat-num">1만+</div>
+            <div class="about-stat-label">월간 수강생</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">10+</div>
+            <div class="about-stat-label">전국 지사 수</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">2,000개</div>
+            <div class="about-stat-label">분기별 파트너 업체</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">6만명</div>
+            <div class="about-stat-label">현재 교육 수강 중</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-badges">
+        <div class="about-badge-item">
+          <div class="about-badge-icon">🏛️</div>
+          <div>
+            <div class="about-badge-title">3개 주무부처 허가 기관</div>
+            <div class="about-badge-sub">고용노동부 · 산업인력공단 · 장애인고용공단</div>
+          </div>
+        </div>
+        <div class="about-badge-item">
+          <div class="about-badge-icon">💻</div>
+          <div>
+            <div class="about-badge-title">PC · 모바일 완벽 지원</div>
+            <div class="about-badge-sub">언제 어디서나 편리하게 온라인 수강 가능</div>
+          </div>
+        </div>
+        <div class="about-badge-item">
+          <div class="about-badge-icon">📊</div>
+          <div>
+            <div class="about-badge-title">자동화 보고서 시스템</div>
+            <div class="about-badge-sub">이수율·진행현황·보고서 자동 생성 및 관리</div>
+          </div>
+        </div>
+        <div class="about-badge-item">
+          <div class="about-badge-icon">👤</div>
+          <div>
+            <div class="about-badge-title">전담 매니저 1:1 배정</div>
+            <div class="about-badge-sub">문의 응대·일정 관리·맞춤 커스터마이징</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-badge">SERVICES</div>
+    <h2 class="section-title">4대 핵심 교육 서비스</h2>
+    <p class="section-desc">법정의무부터 직무향상까지, 기업에 필요한 모든 교육을 한 곳에서 해결하세요.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-icon">📋</div>
+        <div class="service-name">법정의무교육</div>
+        <div class="service-desc">연간 필수 이수 의무교육을 통합 제공합니다. 산업안전·성희롱예방·개인정보보호 등 5개 핵심 의무교육 과정을 원스톱으로 이수하세요.</div>
+        <div class="service-tags">
+          <span class="service-tag">산업안전보건</span>
+          <span class="service-tag">성희롱 예방</span>
+          <span class="service-tag">개인정보보호</span>
+          <span class="service-tag">장애인 인식개선</span>
+          <span class="service-tag">퇴직연금</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-icon">🎓</div>
+        <div class="service-name">직무교육 HRD</div>
+        <div class="service-desc">NCS 기반 약 8,000개 과정을 보유하고 있습니다. 연간 최대 60개 과정을 선택할 수 있는 올인원 패키지로 직무능력을 향상시키세요.</div>
+        <div class="service-tags">
+          <span class="service-tag">8,000+ 과정</span>
+          <span class="service-tag">NCS 기반</span>
+          <span class="service-tag">연간 60개 선택</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-icon">🏥</div>
+        <div class="service-name">보건·의료 특화교육</div>
+        <div class="service-desc">환자안전·감염관리·의약품관리 등 의료기관 맞춤 교육 과정을 별도 추가 금액 없이 제공합니다. 7대 특화 교육과정 포함.</div>
+        <div class="service-tags">
+          <span class="service-tag">환자안전/QI</span>
+          <span class="service-tag">감염관리</span>
+          <span class="service-tag">의약품 관리</span>
+          <span class="service-tag">추가비용 없음</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-icon">💳</div>
+        <div class="service-name">기업직업훈련카드</div>
+        <div class="service-desc">중소기업 재직자 직무능력 향상을 위한 정부 지원 바우처 제도를 활용하세요. HRD4U 홈페이지를 통해 간편하게 신청 가능합니다.</div>
+        <div class="service-tags">
+          <span class="service-tag">중소기업 지원</span>
+          <span class="service-tag">정부 바우처</span>
+          <span class="service-tag">HRD4U 신청</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANDATORY -->
+<section id="mandatory">
+  <div class="container">
+    <div class="section-badge" style="background:rgba(240,165,0,0.15);color:var(--accent);">LAW COMPLIANCE</div>
+    <h2 class="section-title">5대 법정의무교육</h2>
+    <p class="section-desc" style="color:rgba(255,255,255,0.5);">가온강남 원격 평생 교육원에서 원스톱으로 이수 가능합니다.</p>
+    <div class="mandatory-grid">
+      <div class="mandatory-card">
+        <div class="mandatory-icon">⛑️</div>
+        <div class="mandatory-name">산업안전보건교육</div>
+        <div class="mandatory-info">
+          <span>주기: <strong>반기별</strong></span>
+          <span>시간: <strong>12시간 이상</strong></span>
+          <span>대상: 전 직원</span>
+        </div>
+      </div>
+      <div class="mandatory-card">
+        <div class="mandatory-icon">🚫</div>
+        <div class="mandatory-name">성희롱 예방교육</div>
+        <div class="mandatory-info">
+          <span>주기: <strong>연 1회</strong></span>
+          <span>시간: <strong>1시간 이상</strong></span>
+          <span>대상: 전 직원 필수</span>
+        </div>
+      </div>
+      <div class="mandatory-card">
+        <div class="mandatory-icon">🔒</div>
+        <div class="mandatory-name">개인정보보호교육</div>
+        <div class="mandatory-info">
+          <span>주기: <strong>연 1~2회</strong></span>
+          <span>시간: <strong>권고</strong></span>
+          <span>대상: 개인정보 취급자</span>
+        </div>
+      </div>
+      <div class="mandatory-card">
+        <div class="mandatory-icon">♿</div>
+        <div class="mandatory-name">장애인 인식개선</div>
+        <div class="mandatory-info">
+          <span>주기: <strong>연 1회</strong></span>
+          <span>시간: <strong>1시간 이상</strong></span>
+          <span>대상: 전 직원</span>
+        </div>
+      </div>
+      <div class="mandatory-card">
+        <div class="mandatory-icon">💰</div>
+        <div class="mandatory-name">퇴직연금교육</div>
+        <div class="mandatory-info">
+          <span>주기: <strong>연 1회</strong></span>
+          <span>시간: <strong>1시간 이상</strong></span>
+          <span>대상: 퇴직연금 가입자</span>
+        </div>
+      </div>
+    </div>
+    <div class="mandatory-cta">
+      <p>미이수 시 과태료가 부과됩니다. 지금 바로 상담하세요.</p>
+      <a href="tel:15229818" class="btn-main" style="display:inline-block;margin-top:1.2rem;">📞 1522-9818 상담하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRY -->
+<section id="industry">
+  <div class="container">
+    <div class="section-badge">INDUSTRY PLAN</div>
+    <h2 class="section-title">업종별 맞춤 학습계획</h2>
+    <p class="section-desc">담당자 상담을 통해 업종에 맞는 최적의 교육 설계를 받아보세요.</p>
+    <div class="industry-grid">
+      <div class="industry-card">
+        <div class="industry-icon">🏭</div>
+        <div class="industry-name">제조업</div>
+        <div class="industry-tags">
+          <div class="industry-tag">산업안전보건교육</div>
+          <div class="industry-tag">품질관리</div>
+          <div class="industry-tag">설비/공정 개선</div>
+          <div class="industry-tag">위험성 평가</div>
+        </div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">🛎️</div>
+        <div class="industry-name">서비스업</div>
+        <div class="industry-tags">
+          <div class="industry-tag">고객응대/CS</div>
+          <div class="industry-tag">성희롱 예방</div>
+          <div class="industry-tag">개인정보보호</div>
+          <div class="industry-tag">컴플라이언스</div>
+        </div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">🏗️</div>
+        <div class="industry-name">건설업</div>
+        <div class="industry-tags">
+          <div class="industry-tag">현장 안전교육</div>
+          <div class="industry-tag">건설업 법규</div>
+          <div class="industry-tag">위험성 평가</div>
+          <div class="industry-tag">추락/충돌 예방</div>
+        </div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">🏥</div>
+        <div class="industry-name">보건·의료업</div>
+        <div class="industry-tags">
+          <div class="industry-tag">환자안전/QI</div>
+          <div class="industry-tag">감염관리</div>
+          <div class="industry-tag">의료윤리</div>
+          <div class="industry-tag">의약품 관리</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="container">
+    <div class="clients-header">
+      <div>
+        <div class="section-badge">CLIENTS</div>
+        <h2 class="section-title">주요 고객사</h2>
+        <p class="section-desc">분기별 약 2,000개 업체 / 6만명이 신뢰하는 파트너</p>
+      </div>
+      <div class="clients-badge-big">2,000+ 파트너사</div>
+    </div>
+    <div class="clients-sections">
+      <div>
+        <div class="clients-section-title">🏥 보건·의료기관</div>
+        <div class="clients-list">
+          <span class="client-tag">연세바른병원</span>
+          <span class="client-tag">마크성형외과</span>
+          <span class="client-tag">(의)송은의료재단 울산시티병원</span>
+          <span class="client-tag">온누리병원</span>
+          <span class="client-tag">원주프라임병원</span>
+        </div>
+      </div>
+      <div>
+        <div class="clients-section-title">💊 제약·바이오</div>
+        <div class="clients-list">
+          <span class="client-tag">삼진제약(주)</span>
+          <span class="client-tag">피씨엘(주)</span>
+          <span class="client-tag">(주)서원약품</span>
+        </div>
+      </div>
+      <div>
+        <div class="clients-section-title">☕ 식음료·프랜차이즈</div>
+        <div class="clients-list">
+          <span class="client-tag">프리퍼-드림플러스강남</span>
+          <span class="client-tag">프리퍼-사랑카페</span>
+          <span class="client-tag">㈜프리퍼커피서초</span>
+          <span class="client-tag">주식회사 아프로푸드</span>
+        </div>
+      </div>
+      <div>
+        <div class="clients-section-title">⚙️ 제조·전자 / 서비스·기타</div>
+        <div class="clients-list">
+          <span class="client-tag">피엔테크주식회사</span>
+          <span class="client-tag">(주)펨트론</span>
+          <span class="client-tag">대은전자(주)</span>
+          <span class="client-tag">(주)광명전기</span>
+          <span class="client-tag">(주)훼미리월드</span>
+          <span class="client-tag">주식회사 경기소방이앤씨</span>
+          <span class="client-tag">법무법인(유한)창천</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section id="advantages">
+  <div class="container">
+    <div class="section-badge" style="background:rgba(240,165,0,0.15);color:var(--accent);">WHY GAONGN</div>
+    <h2 class="section-title">3대 핵심 장점</h2>
+    <div class="advantages-grid">
+      <div class="advantage-card">
+        <div class="advantage-icon">🖥️</div>
+        <div class="advantage-name">LMS 지속 업데이트</div>
+        <div class="advantage-desc">수강생·담당자·기관 모두 편리한 시스템. PC와 모바일 학습을 완벽히 지원하며, 지속적인 시스템 업데이트로 최적의 학습 환경을 제공합니다.</div>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon">👨‍💼</div>
+        <div class="advantage-name">전담 매니저 배정</div>
+        <div class="advantage-desc">문의 응대 및 일정 관리를 전담 매니저가 책임집니다. 맞춤형 교육 커스터마이징으로 귀사에 최적화된 교육 설계를 제공합니다.</div>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon">📈</div>
+        <div class="advantage-name">자동화 보고서</div>
+        <div class="advantage-desc">진행현황·이수율·보고서를 자동 생성하고 관리합니다. 담당자의 업무 부담을 줄이고 체계적인 교육 관리를 실현합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="section-badge">PROCESS</div>
+    <h2 class="section-title">교육접수 및 개강 프로세스</h2>
+    <p class="section-desc">간단한 5단계로 온라인 교육을 시작하세요.</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-num">1</div>
+        <div class="process-name">상담신청</div>
+        <div class="process-desc">교육 상담 및 문의</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">2</div>
+        <div class="process-name">계약체결</div>
+        <div class="process-desc">계약 및 결제 진행</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">3</div>
+        <div class="process-name">수강생 등록</div>
+        <div class="process-desc">수강생 정보 등록</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">4</div>
+        <div class="process-name">교육진행</div>
+        <div class="process-desc">온라인 교육 진행</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">5</div>
+        <div class="process-name">이수증 발급</div>
+        <div class="process-desc">수료증 발급 완료</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HRD -->
+<section id="hrd">
+  <div class="container">
+    <div class="section-badge">HRD</div>
+    <h2 class="section-title">직무교육과정(HRD)</h2>
+    <p class="section-desc">NCS 기준 8,000+ 직무 콘텐츠로 올인원 패키지를 구성하세요.</p>
+    <div class="hrd-top" style="margin-top:3rem;">
+      <div class="hrd-nums">
+        <div class="hrd-num-card">
+          <div class="hrd-num-big">8,000+</div>
+          <div class="hrd-num-label">NCS 기준 직무 콘텐츠</div>
+        </div>
+        <div class="hrd-num-card">
+          <div class="hrd-num-big">60개</div>
+          <div class="hrd-num-label">연간 최대 선택 가능 과정</div>
+        </div>
+      </div>
+      <div class="hrd-cats">
+        <div class="hrd-cat">
+          <div class="hrd-cat-icon">💻</div>
+          <div class="hrd-cat-name">디지털/IT</div>
+          <div class="hrd-cat-tags">디지털 전환 · IT 기초 · 데이터 활용</div>
+        </div>
+        <div class="hrd-cat">
+          <div class="hrd-cat-icon">📂</div>
+          <div class="hrd-cat-name">사무/회계</div>
+          <div class="hrd-cat-tags">경영관리 · 재무회계 · 문서작성</div>
+        </div>
+        <div class="hrd-cat">
+          <div class="hrd-cat-icon">⚙️</div>
+          <div class="hrd-cat-name">품질/생산</div>
+          <div class="hrd-cat-tags">품질관리 · 공정개선 · 생산효율화</div>
+        </div>
+        <div class="hrd-cat">
+          <div class="hrd-cat-icon">📣</div>
+          <div class="hrd-cat-name">영업/마케팅</div>
+          <div class="hrd-cat-tags">영업전략 · 디지털 마케팅 · 고객관리</div>
+        </div>
+        <div class="hrd-cat">
+          <div class="hrd-cat-icon">🤝</div>
+          <div class="hrd-cat-name">리더십/조직</div>
+          <div class="hrd-cat-tags">리더십 · 팀워크 · 조직문화</div>
+        </div>
+        <div class="hrd-cat">
+          <div class="hrd-cat-icon">⚖️</div>
+          <div class="hrd-cat-name">법정/컴플라이언스</div>
+          <div class="hrd-cat-tags">노동법 · 안전관리 · 윤리교육</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOUCHER -->
+<section id="voucher">
+  <div class="container">
+    <div class="section-badge">VOUCHER</div>
+    <h2 class="section-title">기업직업훈련카드</h2>
+    <p class="section-desc">중소기업 재직자라면 정부 지원 바우처로 교육비 부담 없이 직무교육을 이수하세요.</p>
+    <div class="voucher-grid">
+      <div>
+        <div style="margin-bottom:1.5rem;">
+          <div class="voucher-info-title">지원 대상</div>
+          <div class="voucher-info-body">
+            우선지원대상기업(중소기업) 재직자<br/>
+            기업별 지원 한도 내 훈련비 지원<br/>
+            <ul><li>기업 규모 및 재직 여부 확인 필요</li></ul>
+          </div>
+        </div>
+        <div>
+          <div class="voucher-info-title">신청 방법</div>
+          <div class="voucher-info-body">
+            <ul>
+              <li>HRD4U 홈페이지 직접 신청</li>
+              <li>공단 지부·지사 대행 신청</li>
+            </ul>
+          </div>
+        </div>
+        <div class="voucher-highlight">
+          💡 기업직업훈련카드로 교육비 부담 없이 직무교육을 이수하세요<br/>
+          담당자 상담: <strong>1522-9818</strong>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.75rem;letter-spacing:0.12em;color:var(--mid);margin-bottom:1.2rem;">5단계 진행 절차</div>
+        <div class="voucher-steps">
+          <div class="voucher-step">
+            <div class="vstep-num">1</div>
+            <div>
+              <div class="vstep-name">자격 확인</div>
+              <div class="vstep-desc">기업 규모·재직 여부 확인 (중소기업 여부, 재직자 명단)</div>
+            </div>
+          </div>
+          <div class="voucher-step">
+            <div class="vstep-num">2</div>
+            <div>
+              <div class="vstep-name">카드 발급</div>
+              <div class="vstep-desc">HRD4U 홈페이지에서 기업직업훈련카드 신청 및 발급</div>
+            </div>
+          </div>
+          <div class="voucher-step">
+            <div class="vstep-num">3</div>
+            <div>
+              <div class="vstep-name">과정 선택</div>
+              <div class="vstep-desc">가온강남 원격 평생 교육원 교육과정 중 원하는 과정 선택</div>
+            </div>
+          </div>
+          <div class="voucher-step">
+            <div class="vstep-num">4</div>
+            <div>
+              <div class="vstep-name">수강 진행</div>
+              <div class="vstep-desc">온라인 학습 진행 (PC/모바일 지원)</div>
+            </div>
+          </div>
+          <div class="voucher-step">
+            <div class="vstep-num">5</div>
+            <div>
+              <div class="vstep-name">비용 정산</div>
+              <div class="vstep-desc">바우처 차감 및 훈련비 정산 완료</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-badge" style="background:rgba(240,165,0,0.15);color:var(--accent);">CONTACT</div>
+      <h2 class="section-title">함께하면 더 강해집니다</h2>
+      <p>가온강남 원격 평생 교육원이 여러분의 성장을 함께합니다.<br/>첫 상담은 무료입니다. 지금 바로 문의하세요.</p>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="contact-card-icon">📞</div>
+          <div class="contact-card-title">전화 상담</div>
+          <div class="contact-card-value">1522-9818</div>
+          <div class="contact-card-sub">평일 09:00~18:00</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">📍</div>
+          <div class="contact-card-title">방문 상담</div>
+          <div class="contact-card-value">서울 강서구</div>
+          <div class="contact-card-sub">마곡중앙로 171, 617-618호</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">👤</div>
+          <div class="contact-card-title">대표자</div>
+          <div class="contact-card-value">김성권</div>
+          <div class="contact-card-sub">사업자: 192-81-03417</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">🌐</div>
+          <div class="contact-card-title">온라인 신청</div>
+          <div class="contact-card-value">홈페이지</div>
+          <div class="contact-card-sub">가온강남 원격 평생 교육원</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <div class="tel-label">대표 상담 전화</div>
+      <div class="tel-big">1522-9818</div>
+      <div class="tel-label" style="margin-top:0.5rem;">평일 오전 9시 ~ 오후 6시</div>
+      <a href="tel:15229818" class="tel-btn">지금 바로 상담 신청 →</a>
+      <p style="margin-top:2rem; font-size:0.75rem; color:rgba(255,255,255,0.25);">GAONGN E-LEARNING ACADEMY 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">가온강남 원격 평생 교육원</div>
+    <div class="footer-info">
+      <div>대표: 김성권 | 사업자등록번호: 192-81-03417</div>
+      <div>서울시 강서구 마곡중앙로 171, 마곡나루역프라이빗타워 II 617-618호</div>
+      <div>© 2026 GAONGN E-LEARNING ACADEMY. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
