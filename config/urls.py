@@ -47,8 +47,7 @@ urlpatterns = [
     path('vaca/', include('vaca.urls')),
     path('laundry/', include('laundry.urls')),
     path('f_board/', include('f_board.urls')),
-    path('wait/', include('waitboard.urls')), 
-    path('dbtest/', include('dbtest.urls')),
+    path('wait/', include('waitboard.urls')),     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

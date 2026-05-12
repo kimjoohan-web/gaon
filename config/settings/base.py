@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'laundry.apps.LaundryConfig',
     'f_board.apps.FBoardConfig',
     'waitboard.apps.WaitboardConfig',
-    # 'dbtest.apps.DbtestConfig',
+
     
 ]
 
